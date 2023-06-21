@@ -14,4 +14,9 @@ Unix shell has built-in SHELL COMMANDS that can be used to create directories, l
 
 The shell's ENVIRONMENT accommodates VARIABLES that can be used in the script and also in the command line interface (variables like path, user settings and configuration data).
 
-It builds reuseable code. SHELL FUNCTIONS can accept arguments and return value.	
+It builds reuseable code. SHELL FUNCTIONS can accept arguments and return value.
+
+Custom Shell Description
+The custom shell we created allows command input, execution, and effective error management for invalid commands. The custom shell when invoked display a prompt ready to accept input from the user and after execution, the prompt is displayed again.
+The custom shell command interface supports error handling, built-in commands, logical operators, and variable replacement.
+	
