@@ -6,3 +6,6 @@ This project entails building a command line interpreter that has similar functi
 Flow of Program Execution
 The step-by-step stages of the execution of the shell program written in this project includes:
 //Betty, we will explain the program execution with the files we have created.//
+
+Unix Shell Description
+The Unix shell runs a shell script through the command line such as file manipulation, printing, and execution. The shell takes up form as a COMMAND LINE INTERPRETER. 	
