@@ -8,4 +8,4 @@ The step-by-step stages of the execution of the shell program written in this pr
 //Betty, we will explain the program execution with the files we have created.//
 
 Unix Shell Description
-The Unix shell runs a shell script through the command line such as file manipulation, printing, and execution. The shell takes up form as a COMMAND LINE INTERPRETER. 	
+The Unix shell runs a shell script through the command line such as file manipulation, printing, and execution. The shell takes up form as a COMMAND LINE INTERPRETER. It accepts commands from users, reads interprets, and executes the built-in shell command and programs.	
