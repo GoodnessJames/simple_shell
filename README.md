@@ -12,4 +12,6 @@ The Unix shell runs a shell script through the command line such as file manipul
 
 Unix shell has built-in SHELL COMMANDS that can be used to create directories, list files, print output, modify permission, and even write text.
 
-The shell's ENVIRONMENT accommodates VARIABLES that can be used in the script and also in the command line interface (variables like path, user settings and configuration data).	
+The shell's ENVIRONMENT accommodates VARIABLES that can be used in the script and also in the command line interface (variables like path, user settings and configuration data).
+
+It builds reuseable code. SHELL FUNCTIONS can accept arguments and return value.	
