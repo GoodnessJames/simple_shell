@@ -22,6 +22,6 @@ The custom shell command interface supports error handling, built-in commands, l
 
 HOW TO INVOKE THE CUSTOM SHELL
 The shell is invoked with the following steps:
-1. Compile: Compile all the source codes written for the shell program by ruuning this command: gcc -Wall -Werror -pedantic -std=gnu89 *.c -o hsh
-2. Execute: 
+1. Compile: Compile all the source codes written for the shell program by ruuning this command: gcc -Wall -Werror -pedantic -std=gnu89
+2. Execute: Execute the shell program by typing
 	
