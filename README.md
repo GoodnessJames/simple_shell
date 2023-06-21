@@ -19,4 +19,9 @@ It builds reuseable code. SHELL FUNCTIONS can accept arguments and return value.
 Custom Shell Description
 The custom shell we created allows command input, execution, and effective error management for invalid commands. The custom shell when invoked display a prompt ready to accept input from the user and after execution, the prompt is displayed again.
 The custom shell command interface supports error handling, built-in commands, logical operators, and variable replacement.
+
+HOW TO INVOKE THE CUSTOM SHELL
+The shell is invoked with the following steps:
+1. Compile: Compile all the source codes written for the shell program by ruuning this command: gcc -Wall -Werror -pedantic -std=gnu89 *.c -o hsh
+2. Execute: 
 	
