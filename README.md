@@ -35,4 +35,27 @@ shell.h: Thos is the header file that defines ansmd show all prototypeswith thei
 
 README.md: This file describes all you need to know about this project.
 
-List of Allowed  Functions and system calls for this project
+List of Allowed  Functions and system calls for this project:
+acess
+chdir
+close
+closedir
+execve
+exit
+fflush
+fork
+free
+getcwd
+getline
+getpid
+isatty
+kill
+malloc
+open
+opendir
+perror
+read
+readdir
+signal
+stat(
+istat
