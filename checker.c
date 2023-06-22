@@ -27,5 +27,20 @@ void check_EOF(int len, char *buffer)
 			_puts("\n");
 			free(buffer);
 		}
+		exit(0);
+	}
+}
+
+/**
+ * check_sig - verifies if ctrl c key combination is pressed
+ * @sig: the int variable to compare to SIGINT
+ *
+ * Return: nothing (void)
+ */
+void check_sig(int sig)
+{
+	if (sig == SIGINT)
+	{
+		_puts("\n:) ");
 	}
 }
