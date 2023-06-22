@@ -16,52 +16,20 @@ It builds reuseable code. Shell functions  can accept arguments and return value
 Custom Shell Description: The custom shell we created allows command input, execution, and effective error management for invalid commands. The custom shell when invoked display a prompt ready to accept input from the user and after execution, the prompt is displayed again.
 The custom shell command interface supports error handling, built-in commands, logical operators, and variable replacement.
 
-HOW TO INVOKE THE CUSTOM SHELL
-The shell is invoked with the following steps:
-1. Compile: Compile all the source codes written for the shell program by ruuning this command: gcc -Wall -Werror -pedantic -std=gnu89 
+How to invoke the custom shell:The shell is invoked with the following steps:
+1. Compile: Compile all the source codes written for the shell program by ruuning this command: gcc -Wall -Werror -pedantic -std=gnu89 *.c -o hsh 
 2. Execute: Execute the shell program by typing: ./hsh
 This will take you straight into the custom shell environment. To verify of you issued the right command, you should notice a change in the commamd prompt by spoting the smiling emoji :).
-You can intereact with the command line as much as you can by issuing valid shell commands and when you are done, type "exit" to exit the prompt
+You can intereact with the command line as much as you can by issuing valid shell commands and when you are done, type "exit" to exit the prompt.
+Content of the Project Directory: The content of this project directory includes:
 
-Content of the Project Directory
-The content of this project directory includes:
-AUTHORS: This file contains the list of collborators of this project
+AUTHORS: This file contains the list of collborators of this project.
 
-shell.h: Thos is the header file that defines ansmd show all prototypeswith their arguments and return type.
+shell.h: This is the header file that defines and shows all prototypes with their arguments and return type.
 
 README.md: This file describes all you need to know about this project.
 
-List of Allowed  Functions and system calls for this project:
-acess
-chdir
-close
-closedir
-execve
-exit
-fflush
-fork
-free
-getcwd
-getline
-getpid
-isatty
-kill
-malloc
-open
-opendir
-perror
-read
-readdir
-signal
-stat(
-istat
-fqstat
-strtok
-wait
-waitpid
-wait3
-wait4
-write
+List of Allowed  Functions and system calls for this project: access, chdir,close, closedir, execve, exit, fflush, fork, free, getcwd, getline, getpid, isatty, kill, malloc, open, opendir, perror, read, readdir, signal, stat(_xstat), lstat(_lxstat), fqstat(_fxstat), strtok, wait, waitpid, wait3, wait4, write.
 
 Testing and Validation
 
