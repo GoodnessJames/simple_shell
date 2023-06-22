@@ -59,3 +59,14 @@ readdir
 signal
 stat(
 istat
+fqstat
+strtok
+wait
+waitpid
+wait3
+wait4
+write
+
+Testing and Validation
+
+Conclusion
