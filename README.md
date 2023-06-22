@@ -23,5 +23,7 @@ The custom shell command interface supports error handling, built-in commands, l
 HOW TO INVOKE THE CUSTOM SHELL
 The shell is invoked with the following steps:
 1. Compile: Compile all the source codes written for the shell program by ruuning this command: gcc -Wall -Werror -pedantic -std=gnu89
-2. Execute: Execute the shell program by typing
+2. Execute: Execute the shell program by typing: ./hsh
+This will take you straight into the custom shell environment. To verify of you issued the right command, you should notice a change in the commamd prompt by spoting the smiling emoji :).
+You can intereact 
 	
