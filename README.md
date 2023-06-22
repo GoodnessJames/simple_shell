@@ -31,4 +31,8 @@ Content of the Project Directory
 The content of this project directory includes:
 AUTHORS: This file contains the list of collborators of this project
 
-shell.h: Thos is the header file that defines ansmd show all prototypeswith their arguments and return type..
+shell.h: Thos is the header file that defines ansmd show all prototypeswith their arguments and return type.
+
+README.md: This file describes all you need to know about this project.
+
+List of Allowed  Functions and system calls for this project
