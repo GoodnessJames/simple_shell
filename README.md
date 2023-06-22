@@ -25,4 +25,8 @@ The shell is invoked with the following steps:
 1. Compile: Compile all the source codes written for the shell program by ruuning this command: gcc -Wall -Werror -pedantic -std=gnu89 
 2. Execute: Execute the shell program by typing: ./hsh
 This will take you straight into the custom shell environment. To verify of you issued the right command, you should notice a change in the commamd prompt by spoting the smiling emoji :).
-You can intereact with the command line as much as you can by issuing valid shell commands and when you are done, type "exit" to exit the prompt.
+You can intereact with the command line as much as you can by issuing valid shell commands and when you are done, type "exit" to exit the prompt
+
+Content of the Project Directory
+The content of this project directory includes:
+AUTHORS: This file contains the list of collborators of this project.
