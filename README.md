@@ -38,7 +38,7 @@ This will take you straight into the custom shell environment. To verify of you 
 
 ## Content of the Repository
 - **AUTHORS:** This file contains the list of collaborators of this project.
-- **shell.h:** This is the header file that contains all function prototypes with their parameters and return type.
+- **shell.h:** This is the header file that contains all function prototypes and struct type definitions used in this project.
 - **README.md:** This file describes all you need to know about this project.
 
 ## List of Allowed Functions and System Calls for this Project:
