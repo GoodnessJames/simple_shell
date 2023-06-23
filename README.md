@@ -32,7 +32,7 @@ The shell is invoked with the following steps:
 
   gcc -Wall -Werror -pedantic -std=gnu89 *.c -o hsh 
 - **Execute:** Execute the shell program by typing: ./hsh
-This will take you straight into the custom shell environment. To verify of you issued the right command, you should notice a change in the command prompt by spotting the smiling emoji :). You can interact with the command line as much as you can by issuing valid shell commands.
+This will take you straight into the custom shell environment. To verify of you issued the right command, you should notice a change in the command prompt by spotting the smiling emoji. You can interact with the command line as much as you can by issuing valid shell commands.
 
   **Exit:** When you are done and want to exit, type "exit" to exit the shell prompt or press the key combination: Ctrl + D. 
 
