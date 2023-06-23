@@ -24,4 +24,11 @@ char **splitstr(char *str, const char *delim)
 		input [i] = str[i];
 		i++;
 	}
+	input[i] = '\0';
+
+	token = strtok(input, delim);
+	array = malloc((sizeof(char *) * 2));
+	array[0] = _strdup(token);
+
+
 
