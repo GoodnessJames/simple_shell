@@ -18,3 +18,10 @@ char **splitstr(char *str, const char *delim)
 		perror(_getenv("_"));
 		return (NULL);
 	}
+	i = 0;
+	while(str[i])
+	{
+		input [i] = str[i];
+		i++;
+	}
+
