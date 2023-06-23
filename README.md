@@ -1,4 +1,4 @@
-# Project Title: Simple Shell (Unix-like Command Line Interpreter)
+# Project Title: Simple Shell (Simple Command Line Interpreter)
 
 ## Overview
 This project entails building a command line interpreter that reads commands from either a file or standard input and executes them just like the Unix Shell.
