@@ -1,9 +1,11 @@
 #include "shell.h"
 
 /**
- * check_input - verifies if input us from the terminal
- * Return: nothing (void)
+ * check_input - Verifies if input is from the terminal
+ *
+ * Return: Returns nothing (void)
  */
+
 void check_input(void)
 {
 	if (isatty(STDIN_FILENO))
@@ -11,11 +13,11 @@ void check_input(void)
 }
 
 /**
- * check_EOF - checks if the current position is end of file
- * @len: the return value of getline function
- * @buffer: the temporal storage for holding data
+ * check_EOF - Checks if the current position is end of the file
+ * @len: The return value of getline function
+ * @buffer: The temporal storage for holding data
  *
- * Return: Nothing (void)
+ * Return: Returns nothing (void)
  */
 void check_EOF(int len, char *buffer)
 {
@@ -32,10 +34,10 @@ void check_EOF(int len, char *buffer)
 }
 
 /**
- * check_sig - verifies if ctrl c key combination is pressed
- * @sig: the int variable to compare to SIGINT
+ * check_sig - Verifies if Ctrl C key combination is pressed
+ * @sig: The int variable to compare to SIGINT
  *
- * Return: nothing (void)
+ * Return: Returns nothing (void)
  */
 void check_sig(int sig)
 {
@@ -43,4 +45,38 @@ void check_sig(int sig)
 	{
 		_puts("\n:) ");
 	}
+}
+
+/**
+* checkbuiltin - Matches a command with the associated shell built-in function
+* @cmd: The command to match
+*
+* Return: Returns a function pointer to the associated the built-in function
+*/
+void(*checkbuiltin(char **cmd))(char **av)
+{
+	int i, j;
+	builtins funclist[] = {
+		{"exit", shellexit},
+		{"env", _printenv},
+		{"setenv", _setenv},
+		{"unsetenv", _unsetenv},
+		{NULL, NULL}
+	};
+
+	for (i = 0; funclist[i].name; i++)
+	{
+		j = 0;
+		if (funclist[i].name[j] == cmd[0][j])
+		{
+			for (j = 0; cmd[0][j]; j++)
+			{
+				if (funclist[i].name[j] != cmd[0][j])
+					break;
+			}
+			if (!cmd[0][j])
+				return (funclist[i].fpt);
+		}
+	}
+	return (0);
 }
