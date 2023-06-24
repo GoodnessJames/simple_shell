@@ -11,12 +11,12 @@ Unix shell has built-in shell commands that can be used to create directories, l
 The shell's environment accommodates variables that can be used in the script and also in the command line interface (variables like path, user settings, and configuration data).
 
 ## Simple Shell Description
-The custom shell allows command input, execution, and effective error management for invalid commands. The custom shell when invoked displays a prompt ready to accept input from the user and after execution, the prompt is displayed again.
+The simple shell allows command input, execution, and effective error handling for invalid commands. The custom shell when invoked displays a prompt ready to accept input from the user and after execution, the prompt is displayed again.
 
 ### Key Functionalities of the Simple Shell:
 - Displays a prompt ": ) " and waits for user input.
 - Runs all commands of type "executable program" (ls and /bin/ls).
-- Runs the following build_in commands: exit, env, setenv, and unsetenv.
+- Runs the following built_in commands: exit, env, setenv, and unsetenv.
 - Handles commands with arguments.
 - Handles the PATH global variable.
 - Handles The EOF (End Of File) condition.
@@ -27,6 +27,7 @@ The shell is invoked with the following steps:
 - **Clone:** Clone the simple shell repository using this command (you need to have git installed on your machine first):
 
   git clone https://github.com/GoodnessJames/simple_shell.git
+  
 - **Navigate:** Navigate to the simple shell directory by using this command: cd simple_shell
 - **Compile:** Compile all the source codes written for the shell program by running this command:
 
