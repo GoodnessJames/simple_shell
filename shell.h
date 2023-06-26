@@ -2,7 +2,7 @@
 #define SHELL_H
 
 /*
- * File: main.h
+ * File: shell.h
  * Desc: This file contains prototypes for all the functions & struct
  *		 required for the project - (0x16. C - Simple Shell)
  */
