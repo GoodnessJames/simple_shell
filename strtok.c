@@ -40,9 +40,7 @@ char **splitStr(char *str, const char *delim)
 		array = _realloc(array, (sizeof(char *) * (size - 1)),
 				(sizeof(char *) * size));
 		if (array == 0)
-		{
 			return (NULL);
-		}
 		array[i] = _strdup(token);
 		i++;
 		size++;
