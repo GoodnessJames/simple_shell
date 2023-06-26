@@ -1,143 +1,75 @@
 #include "shell.h"
 
+char **_copyenv(void);
+void free_env(void);
+char **_getenv(const char *var);
+
 /**
- * _getenv - Gets an environmental variable from the PATH
- * @var: The name of the environmental variable to get
+ * _copyenv - Creates a copy of the environment.
  *
- * Return: On SUCCESS, returns (value) ie a pointer to the environ variable
- *		   On FAILURE, returns (NULL) to indicate the variable does not exist
+ * Return: If an error occurs - NULL.
+ *         O/w - a double pointer to the new copy.
  */
-char *_getenv(const char *var)
+char **_copyenv(void)
 {
-	char *value;
-	int i, j;
+	char **new_environ;
+	size_t size;
+	int index;
 
-	if (!var)
+	for (size = 0; environ[size]; size++)
+		;
+
+	new_environ = malloc(sizeof(char *) * (size + 1));
+	if (!new_environ)
 		return (NULL);
-	for (i = 0; environ[i]; i++)
-	{
-		j = 0;
-		if (var[j] == environ[i][j])
-		{
-			while (var[j])
-			{
-				if (var[j] != environ[i][j])
-					break;
 
-				j++;
-			}
-			if (var[j] == '\0')
-			{
-				value = (environ[i] + j + 1);
-				return (value);
-			}
+	for (index = 0; environ[index]; index++)
+	{
+		new_environ[index] = malloc(_strlen(environ[index]) + 1);
+
+		if (!new_environ[index])
+		{
+			for (index--; index >= 0; index--)
+				free(new_environ[index]);
+			free(new_environ);
+			return (NULL);
 		}
+		_strcpy(new_environ[index], environ[index]);
 	}
+	new_environ[index] = NULL;
+
+	return (new_environ);
+}
+
+/**
+ * free_env - Frees the the environment copy.
+ */
+void free_env(void)
+{
+	int index;
+
+	for (index = 0; environ[index]; index++)
+		free(environ[index]);
+	free(environ);
+}
+
+/**
+ * _getenv - Gets an environmental variable from the PATH.
+ * @var: The name of the environmental variable to get.
+ *
+ * Return: If the environmental variable does not exist - NULL.
+ *         Otherwise - a pointer to the environmental variable.
+ */
+char **_getenv(const char *var)
+{
+	int index, len;
+
+	len = _strlen(var);
+	for (index = 0; environ[index]; index++)
+	{
+		if (_strncmp(var, environ[index], len) == 0)
+			return (&environ[index]);
+	}
+
 	return (NULL);
-}
-
-/**
- * _printenv - Prints the current environment
- * @av: Array of arguments
- */
-void _printenv(char **av __attribute__ ((unused)))
-{
-
-	int i;
-
-	if (!environ)
-		return;
-	for (i = 0; environ[i]; i++)
-	{
-		_puts(environ[i]);
-		_puts("\n");
-	}
-}
-
-/**
- * _setenv - Adds or modifies an environment variable
- * @av: Array of arguments
- */
-void _setenv(char **av)
-{
-	int i, j, k;
-
-	if (!av[1] || !av[2])
-	{
-		perror(_getenv("_"));
-		return;
-	}
-
-	for (i = 0; environ[i]; i++)
-	{
-		j = 0;
-		if (av[1][j] == environ[i][j])
-		{
-			while (av[1][j])
-			{
-				if (av[1][j] != environ[i][j])
-					break;
-
-				j++;
-			}
-			if (av[1][j] == '\0')
-			{
-				k = 0;
-				while (av[2][k])
-				{
-					environ[i][j + 1 + k] = av[2][k];
-					k++;
-				}
-				environ[i][j + 1 + k] = '\0';
-				return;
-			}
-		}
-	}
-	if (!environ[i])
-	{
-
-		environ[i] = _strconcat(av[1], "=", av[2]);
-		environ[i + 1] = '\0';
-
-	}
-}
-
-/**
- * _unsetenv - Remove an environment variable from the PATH
- * @av: Array of arguments
- */
-void _unsetenv(char **av)
-{
-	int i, j;
-
-	if (!av[1])
-	{
-		perror(_getenv("_"));
-		return;
-	}
-	for (i = 0; environ[i]; i++)
-	{
-		j = 0;
-		if (av[1][j] == environ[i][j])
-		{
-			while (av[1][j])
-			{
-				if (av[1][j] != environ[i][j])
-					break;
-
-				j++;
-			}
-			if (av[1][j] == '\0')
-			{
-				free(environ[i]);
-				environ[i] = environ[i + 1];
-				while (environ[i])
-				{
-					environ[i] = environ[i + 1];
-					i++;
-				}
-				return;
-			}
-		}
-	}
 }
