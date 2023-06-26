@@ -31,7 +31,6 @@ int main(void)
 			fpt = checkbuiltin(args);
 			if (fpt)
 			{
-				free(buffer);
 				fpt(args);
 			}
 			else if (!cmdpath)
