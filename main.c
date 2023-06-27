@@ -1,66 +1,65 @@
 #include "shell.h"
 
-void sig_handler(int sig);
-int execute(char **args, char **front);
-
+void check_sig(int sig);
+int execute(char **args, char **arg0);
+int main(int ac, char **av);
 /**
- * sig_handler - Prints a new prompt upon a signal.
- * @sig: The signal.
+ * check_sig - Verifies if Ctrl C key combination is pressed
+ *				 and rints a new prompt upon a signal
+ * @sig: The signal
  */
-void sig_handler(int sig)
+void check_sig(int sig)
 {
-	char *new_prompt = "\n$ ";
+	char *prompt = "\n:) ";
 
 	(void)sig;
-	signal(SIGINT, sig_handler);
-	write(STDIN_FILENO, new_prompt, 3);
+	signal(SIGINT, check_sig);
+	write(STDIN_FILENO, prompt, 4);
 }
 
 /**
- * execute - Executes a command in a child process.
- * @args: An array of arguments.
- * @front: A double pointer to the beginning of args.
+ * execute - Executes a command in a child process
+ * @args: An array of arguments
+ * @arg0: A 2D pointer to the start of args
  *
- * Return: If an error occurs - a corresponding error code.
- *         O/w - The exit value of the last executed command.
+ * Return: On SUCCESS, returns the exit value of the last executed command
+ *			If an error occurs returns the associated error code
  */
-int execute(char **args, char **front)
+int execute(char **args, char **arg0)
 {
-	pid_t child_pid;
+	pid_t pid;
 	int status, flag = 0, ret = 0;
-	char *command = args[0];
+	char *cmd = args[0];
 
-	if (command[0] != '/' && command[0] != '.')
+	if (cmd[0] != '/' && cmd[0] != '.')
 	{
 		flag = 1;
-		command = get_location(command);
+		cmd = find_path(cmd);
 	}
-
-	if (!command || (access(command, F_OK) == -1))
+	if (!cmd || (access(cmd, F_OK) == -1))
 	{
 		if (errno == EACCES)
-			ret = (create_error(args, 126));
+			ret = (_error(args, 126));
 		else
-			ret = (create_error(args, 127));
+			ret = (_error(args, 127));
 	}
 	else
 	{
-		child_pid = fork();
-		if (child_pid == -1)
+		pid = fork();
+		if (pid == -1)
 		{
 			if (flag)
-				free(command);
+				free(cmd);
 			perror("Error child:");
 			return (1);
 		}
-		if (child_pid == 0)
+		if (pid == 0)
 		{
-			execve(command, args, environ);
+			execve(cmd, args, environ);
 			if (errno == EACCES)
-				ret = (create_error(args, 126));
+				ret = (_error(args, 126));
 			free_env();
-			free_args(args, front);
-			free_alias_list(aliases);
+			free_args(args, arg0);
 			_exit(ret);
 		}
 		else
@@ -70,65 +69,57 @@ int execute(char **args, char **front)
 		}
 	}
 	if (flag)
-		free(command);
+		free(cmd);
 	return (ret);
 }
 
 /**
- * main - Runs a simple UNIX command interpreter.
- * @argc: The number of arguments supplied to the program.
- * @argv: An array of pointers to the arguments.
+ * main - Runs a simple UNIX command interpreter
+ * @ac: The number of arguments from the command line
+ * @av: An array of argument strings from the command line
  *
- * Return: The return value of the last executed command.
+ * Return: On SUCCESS, returns (ret) ie the value of the last executed command
  */
-int main(int argc, char *argv[])
+int main(int ac, char **av)
 {
-	int ret = 0, retn;
-	int *exe_ret = &retn;
-	char *prompt = "$ ", *new_line = "\n";
+	char *prompt = ":) ", *newline = "\n";
+	int ret_val = 0, exec_retn;
+	int *ret = &exec_retn;
 
-	name = argv[0];
-	hist = 1;
-	aliases = NULL;
-	signal(SIGINT, sig_handler);
+	name = av[0];
+	cmdhistory = 1;
+	signal(SIGINT, check_sig);
 
-	*exe_ret = 0;
-	environ = _copyenv();
+	*ret = 0;
+	environ = _envcopy();
 	if (!environ)
 		exit(-100);
 
-	if (argc != 1)
+	if (ac != 1)
 	{
-		ret = proc_file_commands(argv[1], exe_ret);
+		ret_val = run_commands(av[1], ret);
 		free_env();
-		free_alias_list(aliases);
-		return (*exe_ret);
+		return (*ret);
 	}
-
 	if (!isatty(STDIN_FILENO))
 	{
-		while (ret != END_OF_FILE && ret != EXIT)
-			ret = handle_args(exe_ret);
+		while (ret_val != _EOF && ret_val != EXIT)
+			ret_val = handle_args(ret);
 		free_env();
-		free_alias_list(aliases);
-		return (*exe_ret);
+		return (*ret);
 	}
-
 	while (1)
 	{
-		write(STDOUT_FILENO, prompt, 2);
-		ret = handle_args(exe_ret);
-		if (ret == END_OF_FILE || ret == EXIT)
+		write(STDOUT_FILENO, prompt, 3);
+		ret_val = handle_args(ret);
+		if (ret_val == _EOF || ret_val == EXIT)
 		{
-			if (ret == END_OF_FILE)
-				write(STDOUT_FILENO, new_line, 1);
+			if (ret_val == _EOF)
+				write(STDOUT_FILENO, newline, 1);
 			free_env();
-			free_alias_list(aliases);
-			exit(*exe_ret);
+			exit(*ret);
 		}
 	}
-
 	free_env();
-	free_alias_list(aliases);
-	return (*exe_ret);
+	return (*ret);
 }

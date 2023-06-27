@@ -1,67 +1,62 @@
 #include "shell.h"
 
-char *_strchr(char *s, char c);
-int _strspn(char *s, char *accept);
+char *_strchr(char *str, char c);
+int _strspn(char *str, char *prefix);
 int _strcmp(char *s1, char *s2);
 int _strncmp(const char *s1, const char *s2, size_t n);
 
 /**
- * _strchr - Locates a character in a string.
- * @s: The string to be searched.
- * @c: The character to be located.
+ * _strchr - finds a character in a string
+ * @str: The string to be searched
+ * @c: The character to be located
  *
- * Return: If c is found - a pointer to the first occurence.
- *         If c is not found - NULL.
+ * Return: Returns (s + index) if c is found
+ *         If not found returns NULL
  */
-char *_strchr(char *s, char c)
+char *_strchr(char *str, char c)
 {
-	int index;
+	int i;
 
-	for (index = 0; s[index]; index++)
+	for (i = 0; str[i]; i++)
 	{
-		if (s[index] == c)
-			return (s + index);
+		if (str[i] == c)
+			return (str + i);
 	}
-
 	return (NULL);
 }
 
 /**
- * _strspn - Gets the length of a prefix substring.
- * @s: The string to be searched.
- * @accept: The prefix to be measured.
+ * _strspn - Gets the length of a prefix substring
+ * @str: The string to be searched
+ * @prefix: The prefix to be measured
  *
- * Return: The number of bytes in s which
- *         consist only of bytes from accept.
+ * Return: Returns the number of bytes in the string
  */
-int _strspn(char *s, char *accept)
+int _strspn(char *str, char *prefix)
 {
-	int bytes = 0;
-	int index;
+	int i, bytes = 0;
 
-	while (*s)
+	while (*str)
 	{
-		for (index = 0; accept[index]; index++)
+		for (i = 0; prefix[i]; i++)
 		{
-			if (*s == accept[index])
+			if (*str == prefix[i])
 			{
 				bytes++;
 				break;
 			}
 		}
-		s++;
+		str++;
 	}
 	return (bytes);
 }
 
 /**
- * _strcmp - Compares two strings.
- * @s1: The first string to be compared.
- * @s2: The second string to be compared.
+ * _strcmp - Compares two strings
+ * @s1: The first string to be compared
+ * @s2: The second string to be compared
  *
- * Return: Positive byte difference if s1 > s2
- *         0 if s1 = s2
- *         Negative byte difference if s1 < s2
+ * Return: Returns (0) if s1 =s2 and (*s1 - *s2) if s1 is greater than s2
  */
 int _strcmp(char *s1, char *s2)
 {
@@ -70,7 +65,6 @@ int _strcmp(char *s1, char *s2)
 		s1++;
 		s2++;
 	}
-
 	if (*s1 != *s2)
 		return (*s1 - *s2);
 
@@ -78,14 +72,13 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
- * _strncmp - Compare two strings.
- * @s1: Pointer to a string.
- * @s2: Pointer to a string.
- * @n: The first n bytes of the strings to compare.
+ * _strncmp - Compare n number of bytes in two strings
+ * @s1: Pointer to a first string
+ * @s2: Pointer to a second string
+ * @n: n number of bytes to compare in a string
  *
- * Return: Less than 0 if s1 is shorter than s2.
- *         0 if s1 and s2 match.
- *         Greater than 0 if s1 is longer than s2.
+ * Return: Returns (0) if s1 = s2
+ *         Returns (s1[i] - s2[i]) if s1 is greater than s2
  */
 int _strncmp(const char *s1, const char *s2, size_t n)
 {

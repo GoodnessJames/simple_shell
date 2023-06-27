@@ -1,107 +1,43 @@
 #include "shell.h"
 
-alias_t *add_alias_end(alias_t **head, char *name, char *value);
-void free_alias_list(alias_t *head);
-list_t *add_node_end(list_t **head, char *dir);
-void free_list(list_t *head);
-
 /**
- * add_alias_end - Adds a node to the end of a alias_t linked list.
- * @head: A pointer to the head of the list_t list.
- * @name: The name of the new alias to be added.
- * @value: The value of the new alias to be added.
+ * add_endnode - Adds a node to the end of a list_path linked list.
+ * @head: A pointer to the head of the list_path list
+ * @path: The directory path for the new node
  *
- * Return: If an error occurs - NULL.
- *         Otherwise - a pointer to the new node.
+ * Return: Returns (endnode) on SUCCESS and (NULL) on FAILURE
  */
-alias_t *add_alias_end(alias_t **head, char *name, char *value)
+list_path *add_endnode(list_path **head, char *path)
 {
-	alias_t *new_node = malloc(sizeof(alias_t));
-	alias_t *last;
+	list_path *tmp;
+	list_path *endnode = malloc(sizeof(list_path));
 
-	if (!new_node)
+	if (!endnode)
 		return (NULL);
 
-	new_node->next = NULL;
-	new_node->name = malloc(sizeof(char) * (_strlen(name) + 1));
-	if (!new_node->name)
-	{
-		free(new_node);
-		return (NULL);
-	}
-	new_node->value = value;
-	_strcpy(new_node->name, name);
+	endnode->dir = path;
+	endnode->next = NULL;
 
 	if (*head)
 	{
-		last = *head;
-		while (last->next != NULL)
-			last = last->next;
-		last->next = new_node;
+		tmp = *head;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		endnode->next = endnode;
 	}
 	else
-		*head = new_node;
+		*head = endnode;
 
-	return (new_node);
+	return (endnode);
 }
 
 /**
- * add_node_end - Adds a node to the end of a list_t linked list.
- * @head: A pointer to the head of the list_t list.
- * @dir: The directory path for the new node to contain.
- *
- * Return: If an error occurs - NULL.
- *         Otherwise - a pointer to the new node.
+ * free_list - Frees a list_path linked list
+ * @head: The head of the list_path list
  */
-list_t *add_node_end(list_t **head, char *dir)
+void free_list(list_path *head)
 {
-	list_t *new_node = malloc(sizeof(list_t));
-	list_t *last;
-
-	if (!new_node)
-		return (NULL);
-
-	new_node->dir = dir;
-	new_node->next = NULL;
-
-	if (*head)
-	{
-		last = *head;
-		while (last->next != NULL)
-			last = last->next;
-		last->next = new_node;
-	}
-	else
-		*head = new_node;
-
-	return (new_node);
-}
-
-/**
- * free_alias_list - Frees a alias_t linked list.
- * @head: THe head of the alias_t list.
- */
-void free_alias_list(alias_t *head)
-{
-	alias_t *next;
-
-	while (head)
-	{
-		next = head->next;
-		free(head->name);
-		free(head->value);
-		free(head);
-		head = next;
-	}
-}
-
-/**
- * free_list - Frees a list_t linked list.
- * @head: The head of the list_t list.
- */
-void free_list(list_t *head)
-{
-	list_t *next;
+	list_path *next;
 
 	while (head)
 	{
@@ -109,5 +45,5 @@ void free_list(list_t *head)
 		free(head->dir);
 		free(head);
 		head = next;
-	}
+}
 }

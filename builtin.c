@@ -1,98 +1,92 @@
 #include "shell.h"
-int (*get_builtin(char *command))(char **args, char **front);
-int shellby_exit(char **args, char **front);
-int shellby_cd(char **args, char __attribute__((__unused__)) **front);
+
+int (*checkbuiltin(char *cmd))(char **, char **arg0);
+int shellexit(char **, char **);
+int _cd(char **av, char __attribute__((__unused__)) **arg0);
 
 /**
- * get_builtin - Matches a command with a corresponding
- *               shellby builtin function.
- * @command: The command to match.
+ * checkbuiltin - Matches a command with the associated builtin function
+ * @cmd: The command to match
  *
- * Return: A function pointer to the corresponding builtin.
+ * Return: Returns a function pointer to the associated builtin
  */
-int (*get_builtin(char *command))(char **args, char **front)
+int (*checkbuiltin(char *cmd))(char **av, char **arg0)
 {
-	builtin_t funcs[] = {
-		{ "exit", shellby_exit },
-		{ "env", shellby_env },
-		{ "setenv", shellby_setenv },
-		{ "unsetenv", shellby_unsetenv },
-		{ "cd", shellby_cd },
-		{ "alias", shellby_alias },
-		{ NULL, NULL }
-	};
 	int i;
 
-	for (i = 0; funcs[i].name; i++)
+	builtins funclist[] = {
+		{"exit", shellexit},
+		{"env", _printenv},
+		{"setenv", _setenv},
+		{"unsetenv", _unsetenv},
+		{"cd", _cd },
+		{NULL, NULL}
+	};
+	for (i = 0; funclist[i].name; i++)
 	{
-		if (_strcmp(funcs[i].name, command) == 0)
+		if (_strcmp(funclist[i].name, cmd) == 0)
 			break;
 	}
-	return (funcs[i].f);
+	return (funclist[i].fpt);
 }
 
 /**
- * shellby_exit - Causes normal process termination
- *                for the shellby shell.
- * @args: An array of arguments containing the exit value.
- * @front: A double pointer to the beginning of args.
+ * shellexit - Terminates program execution of the shell
+ * @av: Array of arguments containing the exit value
+ * @arg0: A double pointer to the start of the arguments
  *
- * Return: If there are no arguments - -3.
- *         If the given exit value is invalid - 2.
- *         O/w - exits with the given status value.
- *
- * Description: Upon returning -3, the program exits back in the main function.
+ * Return: On SUCCESS, exits with the given status value
+ *		   On FAILURE,	returns (-3) if there are no arguments
+ *						returns (-2) if the exit value is invalid
  */
-int shellby_exit(char **args, char **front)
+int shellexit(char **av, char **arg0)
 {
-	int i, len_of_int = 10;
-	unsigned int num = 0, max = 1 << (sizeof(int) * 8 - 1);
+	int i, maxLen = 10;
+	unsigned int n = 0, max = 1 << (sizeof(int) * 8 - 1);
 
-	if (args[0])
+	if (av[0])
 	{
-		if (args[0][0] == '+')
+		if (av[0][0] == '+')
 		{
 			i = 1;
-			len_of_int++;
+			maxLen++;
 		}
-		for (; args[0][i]; i++)
+		for (; av[0][i]; i++)
 		{
-			if (i <= len_of_int && args[0][i] >= '0' && args[0][i] <= '9')
-				num = (num * 10) + (args[0][i] - '0');
+			if (i <= maxLen && av[0][i] >= '0' && av[0][i] <= '9')
+				n = (n * 10) + (av[0][i] - '0');
 			else
-				return (create_error(--args, 2));
+				return (_error(--av, 2));
 		}
 	}
 	else
 	{
 		return (-3);
 	}
-	if (num > max - 1)
-		return (create_error(--args, 2));
-	args -= 1;
-	free_args(args, front);
+	if (n > max - 1)
+		return (_error(--av, 2));
+	av -= 1;
+	free_args(av, arg0);
 	free_env();
-	free_alias_list(aliases);
-	exit(num);
+	exit(n);
 }
 
 /**
- * shellby_cd - Changes the current directory of the shellby process.
- * @args: An array of arguments.
- * @front: A double pointer to the beginning of args.
+ * _cd - Changes the current directory of the shell
+ * @args: An array of arguments
+ * @arg0: A double pointer to the beginning of args
  *
- * Return: If the given string is not a directory - 2.
- *         If an error occurs - -1.
- *         Otherwise - 0.
+ * Return: On SUCCESS,	returns (0)
+ *		   On FAILURE,	returns (-2) if the string is not a directory
+ *						returns (-1) if an error occurs
  */
-int shellby_cd(char **args, char __attribute__((__unused__)) **front)
+int _cd(char **args, char __attribute__((__unused__)) **arg0)
 {
-	char **dir_info, *new_line = "\n";
-	char *oldpwd = NULL, *pwd = NULL;
 	struct stat dir;
+	char **pathInfo, *newline = "\n", *prevdir = NULL, *pwd = NULL;
 
-	oldpwd = getcwd(oldpwd, 0);
-	if (!oldpwd)
+	prevdir = getcwd(prevdir, 0);
+	if (!prevdir)
 		return (-1);
 
 	if (args[0])
@@ -107,8 +101,8 @@ int shellby_cd(char **args, char __attribute__((__unused__)) **front)
 			}
 			else
 			{
-				free(oldpwd);
-				return (create_error(args, 2));
+				free(prevdir);
+				return (_error(args, 2));
 			}
 		}
 		else
@@ -118,8 +112,8 @@ int shellby_cd(char **args, char __attribute__((__unused__)) **front)
 				chdir(args[0]);
 			else
 			{
-				free(oldpwd);
-				return (create_error(args, 2));
+				free(prevdir);
+				return (_error(args, 2));
 			}
 		}
 	}
@@ -128,31 +122,30 @@ int shellby_cd(char **args, char __attribute__((__unused__)) **front)
 		if (_getenv("HOME") != NULL)
 			chdir(*(_getenv("HOME")) + 5);
 	}
-
 	pwd = getcwd(pwd, 0);
 	if (!pwd)
 		return (-1);
 
-	dir_info = malloc(sizeof(char *) * 2);
-	if (!dir_info)
+	pathInfo = malloc(sizeof(char *) * 2);
+	if (!pathInfo)
 		return (-1);
 
-	dir_info[0] = "OLDPWD";
-	dir_info[1] = oldpwd;
-	if (shellby_setenv(dir_info, dir_info) == -1)
+	pathInfo[0] = "OLDPWD";
+	pathInfo[1] = prevdir;
+	if (_setenv(pathInfo, pathInfo) == -1)
 		return (-1);
 
-	dir_info[0] = "PWD";
-	dir_info[1] = pwd;
-	if (shellby_setenv(dir_info, dir_info) == -1)
+	pathInfo[0] = "PWD";
+	pathInfo[1] = pwd;
+	if (_setenv(pathInfo, pathInfo) == -1)
 		return (-1);
 	if (args[0] && args[0][0] == '-' && args[0][1] != '-')
 	{
 		write(STDOUT_FILENO, pwd, _strlen(pwd));
-		write(STDOUT_FILENO, new_line, 1);
+		write(STDOUT_FILENO, newline, 1);
 	}
-	free(oldpwd);
+	free(prevdir);
 	free(pwd);
-	free(dir_info);
+	free(pathInfo);
 	return (0);
 }

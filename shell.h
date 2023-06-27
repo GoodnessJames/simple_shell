@@ -1,135 +1,105 @@
-#ifndef _SHELL_H_
-#define _SHELL_H_
+#ifndef SHELL_H
+#define SHELL_H
 
-#include <fcntl.h>
+/*
+ * File: shell.h
+ * Desc: This file contains prototypes for all the functions & struct
+ *		 required for the project - (0x16. C - Simple Shell)
+ */
+
+/* Macro definition for EXIT & EOF markers */
+#define EXIT -3
+#define _EOF -1
+
+/* Standard C Library Headers */
 #include <signal.h>
+#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <errno.h>
 #include <stdio.h>
+#include <string.h>
+#include <errno.h>
 
-#define END_OF_FILE -2
-#define EXIT -3
-
-/* Global environemnt */
+/* External Variable Declaration */
 extern char **environ;
 /* Global program name */
 char *name;
-/* Global history counter */
-int hist;
+/* Global command history counter */
+int cmdhistory;
 
 /**
- * struct list_s - A new struct type defining a linked list.
- * @dir: A directory path.
- * @next: A pointer to another struct list_s.
+ * struct list_path - A struct type defining a linked list
+ * @dir: The directory path
+ * @next: A pointer to next node
  */
-typedef struct list_s
+typedef struct list_path
 {
 	char *dir;
-	struct list_s *next;
-} list_t;
+	struct list_path *next;
+} list_path;
 
 /**
- * struct builtin_s - A new struct type defining builtin commands.
- * @name: The name of the builtin command.
- * @f: A function pointer to the builtin command's function.
+ * struct builtins - A struct type defining builtin commands
+ * @name: The command name
+ * @fpt: A function pointer to the builtin command functions
  */
-typedef struct builtin_s
+typedef struct builtins
 {
 	char *name;
-	int (*f)(char **argv, char **front);
-} builtin_t;
+	int (*fpt)(char **, char **);
+} builtins;
 
-/**
- * struct alias_s - A new struct defining aliases.
- * @name: The name of the alias.
- * @value: The value of the alias.
- * @next: A pointer to another struct alias_s.
- */
-typedef struct alias_s
-{
-	char *name;
-	char *value;
-	struct alias_s *next;
-} alias_t;
-
-/* Global aliases linked list */
-alias_t *aliases;
-
-/* Main Helpers */
+/* Function Protypes required for the tasks */
+void _setlineptr(char **lineptr, size_t *n, char *buffer, size_t b);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char **_strtok(char *line, char *delim);
-char *get_location(char *command);
-list_t *get_path_dir(char *path);
-int execute(char **args, char **front);
-void free_list(list_t *head);
-char *_itoa(int num);
-
-/* Input Helpers */
-void handle_line(char **line, ssize_t read);
-void variable_replacement(char **args, int *exe_ret);
-char *get_args(char *line, int *exe_ret);
-int call_args(char **args, char **front, int *exe_ret);
-int run_args(char **args, char **front, int *exe_ret);
-int handle_args(int *exe_ret);
+char *find_path(char *command);
+list_path *get_path(char *path);
+int execute(char **args, char **arg0);
+void free_list(list_path *head);
+char *_itoa(int);
+void split_line(char **line, ssize_t len);
+char *env_value(char *var, int len);
+void replace_var(char **args, int *ret);
+char *get_args(char *line, int *ret);
+int call_args(char **args, char **arg0, int *ret);
+int run_args(char **args, char **arg0, int *ret);
+int handle_args(int *ret);
 int check_args(char **args);
-void free_args(char **args, char **front);
-char **replace_aliases(char **args);
-
-/* String functions */
+void free_args(char **args, char **arg0);
 int _strlen(const char *s);
 char *_strcat(char *dest, const char *src);
 char *_strncat(char *dest, const char *src, size_t n);
 char *_strcpy(char *dest, const char *src);
-char *_strchr(char *s, char c);
-int _strspn(char *s, char *accept);
+char *_strchr(char *str, char c);
+int _strspn(char *str, char *prefix);
 int _strcmp(char *s1, char *s2);
 int _strncmp(const char *s1, const char *s2, size_t n);
-
-/* Builtins */
-int (*get_builtin(char *command))(char **args, char **front);
-int shellby_exit(char **args, char **front);
-int shellby_env(char **args, char __attribute__((__unused__)) **front);
-int shellby_setenv(char **args, char __attribute__((__unused__)) **front);
-int shellby_unsetenv(char **args, char __attribute__((__unused__)) **front);
-int shellby_cd(char **args, char __attribute__((__unused__)) **front);
-int shellby_alias(char **args, char __attribute__((__unused__)) **front);
-int shellby_help(char **args, char __attribute__((__unused__)) **front);
-
-/* Builtin Helpers */
-char **_copyenv(void);
+int (*checkbuiltin(char *cmd))(char **, char **);
+int shellexit(char **, char **);
+int _printenv(char **args, char __attribute__((__unused__)) **arg0);
+int _setenv(char **args, char __attribute__((__unused__)) **arg0);
+int _unsetenv(char **args, char __attribute__((__unused__)) **arg0);
+int _cd(char **args, char __attribute__((__unused__)) **arg0);
+char **_envcopy(void);
 void free_env(void);
 char **_getenv(const char *var);
+int _error(char **, int);
+char *env_error(char **);
+char *exit_error(char **);
+char *cd_error(char **);
+char *syntax_error(char **);
+char *error126(char **);
+char *error127(char **);
+list_path *add_endnode(list_path **head, char *path);
+void free_list(list_path *head);
+ssize_t newLen(char *line);
+void logical_ops(char *line, ssize_t *new_len);
+int digitlen(int);
+int run_commands(char *path, int *ret);
 
-/* Error Handling */
-int create_error(char **args, int err);
-char *error_env(char **args);
-char *error_1(char **args);
-char *error_2_exit(char **args);
-char *error_2_cd(char **args);
-char *error_2_syntax(char **args);
-char *error_126(char **args);
-char *error_127(char **args);
-
-/* Linkedlist Helpers */
-alias_t *add_alias_end(alias_t **head, char *name, char *value);
-void free_alias_list(alias_t *head);
-list_t *add_node_end(list_t **head, char *dir);
-void free_list(list_t *head);
-
-void help_all(void);
-void help_alias(void);
-void help_cd(void);
-void help_exit(void);
-void help_help(void);
-void help_env(void);
-void help_setenv(void);
-void help_unsetenv(void);
-void help_history(void);
-
-int proc_file_commands(char *file_path, int *exe_ret);
-#endif /* _SHELL_H_ */
+#endif
