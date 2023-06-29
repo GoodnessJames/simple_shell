@@ -39,7 +39,7 @@ The shell is invoked with the following steps:
 
 - **Execute:** Execute the shell program by typing: ./hsh
 
-This will take you straight into the custom shell environment. To verify of you issued the right command, you should notice a change in the command prompt by spotting the smiling emoji. You can interact with the command line as much as you can by issuing valid shell commands.
+Upon issuing the above command, you should notice a change in the command prompt by spotting the smiling emoji. You can interact with the shell as much as you want by issuing valid shell commands.
 
   **Exit:** When you are done and want to exit, type "exit" to exit the shell prompt or press the key combination: Ctrl + D.
 
@@ -57,7 +57,7 @@ The step-by-step stages of the execution of the shell program written in this pr
 
 2. Several variables are declared, including **prompt** and **newline** which are character pointers initialized with specific strings, **ret_val** and **exec_retn** which are integers, and **ret** which is a pointer to an integer.
 
-3 .The value of **name** is assigned to **av[0]**, which is the name of the program itself, and the **cmdhistory** variable is set to 1.
+3. The value of **name** is assigned to **av[0]**, which is the name of the program itself, and the **cmdhistory** variable is set to 1.
 
 4. The signal function is used to set up a signal handler for the SIGINT signal, which is generated when the user presses Ctrl+C. The **check_sig** function is specified as the signal handler.
 
