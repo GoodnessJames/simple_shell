@@ -44,8 +44,8 @@ char *_strcpy(char *dest, const char *src)
  */
 char *_strcat(char *dest, const char *src)
 {
-	int destLen = strlen(dest);
 	int i;
+	int destLen = _strlen(dest);
 
 	for (i = 0; src[i] != '\0'; i++)
 		dest[destLen + i] = src[i];
