@@ -38,6 +38,7 @@ The shell is invoked with the following steps:
 ```
 
 - **Execute:** Execute the shell program by typing: ./hsh
+
 This will take you straight into the custom shell environment. To verify of you issued the right command, you should notice a change in the command prompt by spotting the smiling emoji. You can interact with the command line as much as you can by issuing valid shell commands.
 
   **Exit:** When you are done and want to exit, type "exit" to exit the shell prompt or press the key combination: Ctrl + D.
@@ -52,10 +53,34 @@ access, chdir, close, closedir, execve, exit, fflush, fork, free, getcwd, getlin
 
 ## Flow of Program Execution
 The step-by-step stages of the execution of the shell program written in this project include:
+1 .The main function is the entry point of the program. It takes two arguments: **ac** (argument count) and **av** (argument vector) which represent the command-line arguments passed to the program.
+2. Several variables are declared, including **prompt** and **newline** which are character pointers initialized with specific strings, **ret_val** and **exec_retn** which are integers, and **ret** which is a pointer to an integer.
+3 .The value of **name** is assigned to **av[0]**, which is the name of the program itself, and the **cmdhistory** variable is set to 1.
+4. The signal function is used to set up a signal handler for the SIGINT signal, which is generated when the user presses Ctrl+C. The **check_sig** function is specified as the signal handler.
+5. The value of **ret** is set to 0 and the **_envcopy** function is called to create a copy of the environment variables. The result is assigned to the **environ** variable.
+6. If the **environ** variable is NULL (indicating a failure to copy the environment variables), the program exits with a status code of -100.
+7. If the **ac** argument is not equal to 1 (indicating that command-line arguments were provided), the program proceeds to execute the code inside this block.
+8. Inside the block, the **run_commands** function is called with **av[1]** (the first command-line argument) and **ret** as arguments. The return value of **run_commands** is assigned to **ret_val**.
+9. The **free_env** function is called to free the memory allocated for the environment variables.
+10. The value pointed to by **ret** is returned as the program's exit status.
+11. If the **ac** argument is equal to 1 and the standard input is not a terminal (checked using **isatty(STDIN_FILENO))**, the program proceeds to execute the code inside this block.
+12. Inside the block, the **handle_args** function is called repeatedly with **ret** as an argument until the return value **(ret_val)** is either _EOF or EXIT.
+13. The **free_env** function is called to free the memory allocated for the environment variables.
+14. The value pointed to by **ret** is returned as the program's exit status.
+15. If the conditions in the previous two blocks are not met, the program enters an infinite loop.
+16. Inside the loop, the **write** function is used to display the contents of the prompt string to the **standard output**.
+17. The **handle_args** function is called with ret as an argument, and the return value is assigned to **ret_val**.
+18. If the value of **ret_val** is either _EOF or EXIT, the program checks which one occurred.
+19. If **ret_val** is _EOF, the **newline** character is **written** to the standard output.
+20. The **free_env** function is called to free the memory allocated for the environment variables.
+21. The value pointed to by **ret** is used as the program's **exit status** and the program exits.
+22. If **ret_val** is EXIT, the program follows the same steps as in the previous step **(step 20)**.
+23. After the loop is exited, the **free_env** function is called to free the memory allocated for the environment variables.
+24. The value pointed to by **ret** is returned as the program's exit status.
 
 ## Testing and Validation
 
-The following presents the results of the simple shell test cases, confirming the expected functionality of the shell functions:
+The following presents the results of the simple shell test cases, confirming the expected functionality of the shell program:
 
 **Invocation**
 
@@ -69,8 +94,8 @@ The simple shell can be invoked both interactively and non-interactively. If the
 
 Example:
 ```
-:) echo "echo 'hello'" | ./hsh
-   'hello'
+:) echo "/bin/ls" | ./hsh
+hsh main.c shell.h str_func1.c
 :)
 ```
 
