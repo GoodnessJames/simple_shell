@@ -23,7 +23,7 @@ list_path *add_endnode(list_path **head, char *path)
 		tmp = *head;
 		while (tmp->next != NULL)
 			tmp = tmp->next;
-		endnode->next = endnode;
+		tmp->next = endnode;
 	}
 	else
 		*head = endnode;
