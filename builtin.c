@@ -1,8 +1,8 @@
 #include "shell.h"
 
 int (*checkbuiltin(char *cmd))(char **, char **arg0);
-int shellexit(char **, char **);
-int _cd(char **av, char __attribute__((__unused__)) **arg0);
+int shellexit(char **args, char **arg0);
+int _cd(char **args, char __attribute__((__unused__)) **arg0);
 
 /**
  * checkbuiltin - Matches a command with the associated builtin function
@@ -10,7 +10,7 @@ int _cd(char **av, char __attribute__((__unused__)) **arg0);
  *
  * Return: Returns a function pointer to the associated builtin
  */
-int (*checkbuiltin(char *cmd))(char **av, char **arg0)
+int (*checkbuiltin(char *cmd))(char **args, char **arg0)
 {
 	int i;
 
@@ -32,31 +32,31 @@ int (*checkbuiltin(char *cmd))(char **av, char **arg0)
 
 /**
  * shellexit - Terminates program execution of the shell
- * @av: Array of arguments containing the exit value
+ * @args: Array of arguments containing the exit value
  * @arg0: A double pointer to the start of the arguments
  *
  * Return: On SUCCESS, exits with the given status value
  *		   On FAILURE,	returns (-3) if there are no arguments
  *						returns (-2) if the exit value is invalid
  */
-int shellexit(char **av, char **arg0)
+int shellexit(char **args, char **arg0)
 {
 	int i, maxLen = 10;
 	unsigned int n = 0, max = 1 << (sizeof(int) * 8 - 1);
 
-	if (av[0])
+	if (args[0])
 	{
-		if (av[0][0] == '+')
+		if (args[0][0] == '+')
 		{
 			i = 1;
 			maxLen++;
 		}
-		for (; av[0][i]; i++)
+		for (i = 0; args[0][i]; i++)
 		{
-			if (i <= maxLen && av[0][i] >= '0' && av[0][i] <= '9')
-				n = (n * 10) + (av[0][i] - '0');
+			if (i <= maxLen && args[0][i] >= '0' && args[0][i] <= '9')
+				n = (n * 10) + (args[0][i] - '0');
 			else
-				return (_error(--av, 2));
+				return (_error(--args, 2));
 		}
 	}
 	else
@@ -64,9 +64,9 @@ int shellexit(char **av, char **arg0)
 		return (-3);
 	}
 	if (n > max - 1)
-		return (_error(--av, 2));
-	av -= 1;
-	free_args(av, arg0);
+		return (_error(--args, 2));
+	args -= 1;
+	free_args(args, arg0);
 	free_env();
 	exit(n);
 }
