@@ -43,11 +43,6 @@ Upon issuing the above command, you should notice a change in the command prompt
 
   **Exit:** When you are done and want to exit, type "exit" to exit the shell prompt or press the key combination: Ctrl + D.
 
-## Content of the Repository
-- **AUTHORS:** This file contains the list of collaborators of this project.
-- **shell.h:** This is a header file that contains all function prototypes and struct type definitions used in this project.
-- **README.md:** This file describes all you need to know about this project.
-
 ## List of Allowed Functions and System Calls for this Project:
 access, chdir, close, closedir, execve, exit, fflush, fork, free, getcwd, getline, getpid, isatty, kill, malloc, open, opendir, perror, read, readdir, signal, stat(_xstat), lstat(_lxstat), fqstat(_fxstat), strtok, wait, waitpid, wait3, wait4, write.
 
