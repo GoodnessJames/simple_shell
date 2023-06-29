@@ -47,25 +47,36 @@ access, chdir, close, closedir, execve, exit, fflush, fork, free, getcwd, getlin
 
 ## Flow of Program Execution
 The step-by-step stages of the execution of the shell program written in this project include:
-- The entry point of the program is the **main** function. In this function, several variables are declared, including **len** and **size** as ssize_t and size_t respectively, **buffer** as a character pointer, **value**, **pathname**, and **args** as character pointers, **head** as a pointer to a **list_path** struct, and **fpt** as a function pointer.
-- It sets the **SIGINT** signal handler to the **‘check_sig’** function using signal.
-- It enters a while loop that continues until len is equal to EOF (end of file). Within the loop, it calls **‘check_input’**(isatty ) to print the prompt if the input is coming from a terminal.
-- It uses **‘getline’** to read a line of input from stdin into a buffer, storing the number of characters read in len and the allocated size of buff in size.
-- It calls **‘check_EOF’** function to handle the end of file condition based on the value of len and buff.
-- It uses **‘splitStr’** to split the line of input stored in buff into an array of strings (av), using spaces and newline characters as delimiters.
-- It checks if av is empty or if the first element av[0] is empty. If so, it calls the **‘execute’** function.
-- If av is not empty and av[0] is not empty, it proceeds to the next steps. It retrieves the value of the "PATH" environment variable using **‘_getenv’** and stores it in value.
-- It creates a linked list of directories from the "PATH" value by calling **‘linkpath’** and passing value. The resulting list is stored in ‘head’.
-- It uses **‘findpath’** to find the full path of the command specified by av[0] by traversing the linked list of directories (head). The result is stored in pathname.
-- It calls **‘checkbuiltin’** to check if the command is a built-in command. If a matching built-in command is found, the corresponding function is stored in fpt.
-- If a built-in command function is found (fpt is not NULL), it frees buff and calls the built-in command function with arv as an argument.
-- If a built-in command function is not found and pathname is not found (meaning the command is not a built-in and not found in any of the directories in the "PATH"), it calls **‘execute’** with av as an argument.
-- If pathname is found (meaning the command is not a built-in and found in one of the directories in the "PATH"), it updates av[0] to be the full path stored in pathname, frees the previous av[0], and calls ‘execute’ with av as an argument.
-- After the loop ends, it frees the linked list of directories using free_list.
-- It frees the av array of strings using free_av.
-- It frees the buffer allocated by **getline.**
-- Finally, it returns 0 to indicate successful execution of the program.
 
 ## Testing and Validation
+
+The following presents the results of the simple shell test cases, confirming the expected functionality of the shell functions:
+
+**Invocation**
+
+To invoke the simple shell, compile all .c files in the repository and run the resulting executable:
+
+```
+gcc *.c -o hsh
+./hsh
+```
+The simple shell can be invoked both interactively and non-interactively. If the simple shell is invoked with standard input not connected to a terminal (non-interactively), it reads and executes received commands in order.
+
+Example:
+```
+:) echo "echo 'hello'" | ./hsh
+   'hello'
+:)
+
+If the shell is invoked with standard input connected to a terminal, an interactive shell is opened. When executing interactively, the simple shell  displays the prompt :) when it is ready to read a command.
+
+Example:
+
+```
+:) ./hsh
+:)
+
+**Environemt**
+
 
 ## Conclusion
