@@ -34,10 +34,10 @@ The shell is invoked with the following steps:
 - **Compile:** Compile all the source codes written for the shell program by running this command:
 
 ```
-  gcc -Wall -Werror -pedantic -std=gnu89 *.c -o hsh
+  gcc -Wall -Werror -pedantic -std=gnu89 *.c -o shell
 ```
 
-- **Execute:** Execute the shell program by typing: ./hsh
+- **Execute:** Execute the shell program by typing: ./shell
 
 Upon issuing the above command, you should notice a change in the command prompt by spotting the smiling emoji. You can interact with the shell as much as you want by issuing valid shell commands.
 
@@ -102,22 +102,20 @@ The step-by-step stages of the execution of the shell program written in this pr
 24. The value pointed to by **ret** is returned as the program's exit status.
 
 ## Testing and Validation
-
 The following presents the results of the simple shell test cases, confirming the expected functionality of the shell program:
 
-**Invocation**
-
+### Invocation
 To invoke the simple shell, compile all .c files in the repository and run the resulting executable:
 
 ```
-gcc *.c -o hsh
-./hsh
+gcc *.c -o shell
+./shell
 ```
 The simple shell can be invoked both interactively and non-interactively. If the simple shell is invoked with standard input not connected to a terminal (non-interactively), it reads and executes received commands in order.
 
 Example:
 ```
-:) echo "/bin/ls" | ./hsh
+:) echo "/bin/ls" | ./shell
 hsh main.c shell.h str_func1.c
 :)
 ```
@@ -127,11 +125,160 @@ If the shell is invoked with standard input connected to a terminal, an interact
 Example:
 
 ```
-:) ./hsh
+:) ./shell
 :)
 ```
 
-**Environemt**
+### Environment
+The environment is an array of name-value strings describing variables in the format - NAME=VALUE. Upon invocation, the simple shell receives and copies the environment of the parent process in which it was executed. A few key environmental variables are:
+
+**HOME**
+
+The HOME environment variable refers to the directory path that serves as the home directory for a user in a Unix-like operating system. It represents the default location where user-specific files and directories are stored. Testing the HOME environment variable of the shell in non-interactive mode:
+
+```
+$ echo "echo $HOME" | ./shell
+/root
+```
+
+**PWD**
+
+The PWD environment variable stands for "Present Working Directory." It stores the absolute path of the current directory or folder in which a process or shell session is operating. Testing the PWD environment variable of the shell in interactive mode:
+
+```
+:) echo $OLDPWD
+/home/vagrant/ALX
+```
+
+**PATH**
+
+This is a colon-separated list of directories in which the shell looks for commands. 
+
+```
+$ echo "echo $PATH" | ./shell
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+```
+
+### Command Execution
+Once a command is received, the simple shell tokenizes it by splitting it into individual words using a space (" ") as a delimiter. The first word is identified as the command itself, while the remaining words are recognized as arguments for that specific command. Subsequently, the simple shell proceeds with the subsequent actions outlined below:
+
+- If the command's first character is neither a slash (/) nor a dot (.), the simple shell initiates a search for it within the list of shell builtins. If a shell built-in with a matching name is found, it is invoked and executed.
+- If the first character of the command is not a slash (/), dot (.), or a shell built-in, the simple shell proceeds to search each directory specified in the PATH environment variable. The purpose of this search is to locate a directory containing an executable file with a matching name.
+- If the first character of the command is a slash (/) or a dot (.) or if any of the previous searches are successful, the simple shell proceeds to execute the named program. Any remaining arguments provided are included in the execution process within a separate execution environment.
+
+### Exit Status
+The simple shell returns the exit status of the last command executed, where a value of zero signifies success and a non-zero value indicates failure.
+
+If a command is not found, the return status is 127; if a command is found but is not executable, the exit status is set to 126.
+
+For built-in commands, a return status of zero indicates success, while a value of one or two indicates incorrect usage, accompanied by an appropriate error message.
+
+### Signals
+When operating in interactive mode, the simple shell prints a new prompt upon the signal - Ctrl+C from keyboard input. However, if the input of end-of-file (Ctrl+D) is detected, the program will be terminated and exited.
+
+Below, the user presses Ctrl+C twice and hits Ctrl+D in the third line.
+
+```
+$ ./shell
+:) ^C
+:) ^C
+$
+```
+
+### Variable Replacement
+This feature allows the substitution of the value of a variable within a string or command. The simple shell interprets the $ character for variable replacement.
+
+Example:
+
+```
+$ echo "echo $PWD" | ./shell
+/root/simple_shell
+```
+
+**$?**
+
+? is substituted with the return value of the last program executed.
+
+Example:
+
+```
+$ echo "echo $?" | ./shell
+0
+```
+
+### Comments
+The shell ignores all words and characters preceded by a "#" character on a line.
+
+```
+$ echo "echo 'hello' #this will be ignored!" | ./shell 'hello'
+```
+
+### Operators
+The simple shell interprets the following operator characters:
+
+**Command Separator (;)**
+
+Sequential execution takes place in the simple shell when commands are separated by a semicolon (;).
+
+Example:
+
+$ echo "echo 'hello' ; echo 'bonjour'" | ./shell
+'hello'
+'bonjour'
+
+**Logical 'AND' Operator (&&)**
+
+In the simple shell, when using the syntax "command1 && command2", command2 is executed only if command1 returns an exit status of zero.
+
+Example:
+
+Consider the scenario where you attempt to remove a non-existent file from your directory using the **'rm'** command. Additionally, you want to display the message "File removed successfully" on the screen using the **'echo'** command. In this case: **rm** is referred to as **command1**. **echo** "File removed successfully" is referred to as **command2**. However, since the file you are trying to remove does not exist, the **rm** command fails to execute and does not return an exit status of **zero** to indicate **success**. Consequently, **command2** (the echo command) will not be executed. 
+
+**Here's a demonstration:**
+
+```
+:) ls
+main.c shell.h
+:) rm strings.c && echo "File removed successfully"
+rm: cannot remove 'strings.c': No such file or directory
+```
+Due to the non-existent file (strings.c), the **rm** command will fail, and the subsequent echo command will not be executed. As a result, you will not see the "File removed successfully" message displayed on the screen.
+
+
+**Logical 'OR' Operator (||)**
+
+Given: command1 || command2; command2 is executed only if command1 returns a non-zero exit status (ie if command1 returns a TRUE value).
+
+**Here's a demonstration:**
+
+```
+:) ls
+main.c shell.h
+:) rm strings.c || echo "File removed successfully"
+rm: cannot remove 'strings.c': No such file or directory
+"File removed successfully"
+```
+
+The logical operators **&&** and **||** have equal precedence, followed by **;**.
+
+### Simple Shell Buitin Commands
+
+**cd**
+**exit**
+**env**
+**setenv**
+**unsetenv**
+
+
+
 
 
 ## Conclusion
+
+## Authors
+- [Akoma Goodness James] (https://github.com/GoodnessJames)
+- Nna Ginika Elizabeth (https://github.com/Giniks)
+  
+## Acknowledgements
+This project was written as part of the curriculum for ALX School as a requirement to achieve a milestone and commence the second sprint in software engineering.
+ALX is an innovative learning community and leadership development program that offers free, high-quality education in various fields such as software engineering, data science, and entrepreneurship. For more information, visit the link: https://www.alxafrica.com/
