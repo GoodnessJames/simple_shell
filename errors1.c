@@ -29,8 +29,8 @@ char *env_error(char **args)
 	_strcat(error, ": ");
 	_strcat(error, args[0]);
 	_strcat(error, ": Unable to add/remove from environment\n");
-	free(histStr);
 
+	free(histStr);
 	return (error);
 }
 
@@ -63,8 +63,8 @@ char *exit_error(char **args)
 	_strcat(error, ": exit: Illegal number: ");
 	_strcat(error, args[0]);
 	_strcat(error, "\n");
-	free(histStr);
 
+	free(histStr);
 	return (error);
 }
 
@@ -102,8 +102,8 @@ char *cd_error(char **args)
 		_strcat(error, ": cd: can't cd to ");
 	_strcat(error, args[0]);
 	_strcat(error, "\n");
-	free(histStr);
 
+	free(histStr);
 	return (error);
 }
 
@@ -136,7 +136,7 @@ char *syntax_error(char **args)
 	_strcat(error, ": Syntax error: \"");
 	_strcat(error, args[0]);
 	_strcat(error, "\" unexpected\n");
-	free(histStr);
 
+	free(histStr);
 	return (error);
 }
