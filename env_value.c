@@ -14,7 +14,7 @@ void free_args(char **args, char **arg0)
 {
 	size_t i;
 
-	for (i = 0; args[i]; i++)
+	for (i = 0; args[i] || args[i + 1]; i++)
 		free(args[i]);
 
 	free(arg0);
@@ -38,13 +38,13 @@ char *get_pid(void)
 		perror("Cant read file");
 		return (NULL);
 	}
-	pid = malloc(120);
+	pid = malloc(128);
 	if (!pid)
 	{
 		close(file);
 		return (NULL);
 	}
-	read(file, pid, 120);
+	read(file, pid, 128);
 	while (pid[i] != ' ')
 		i++;
 	pid[i] = '\0';
