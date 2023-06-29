@@ -26,12 +26,17 @@ The simple shell allows command input, execution, and effective error handling f
 The shell is invoked with the following steps:
 - **Clone:** Clone the simple shell repository using this command (you need to have git installed on your machine first):
 
+```
   git clone https://github.com/GoodnessJames/simple_shell.git
+```
 
 - **Navigate:** Navigate to the simple shell directory by using this command: cd simple_shell
 - **Compile:** Compile all the source codes written for the shell program by running this command:
 
+```
   gcc -Wall -Werror -pedantic -std=gnu89 *.c -o hsh
+```
+
 - **Execute:** Execute the shell program by typing: ./hsh
 This will take you straight into the custom shell environment. To verify of you issued the right command, you should notice a change in the command prompt by spotting the smiling emoji. You can interact with the command line as much as you can by issuing valid shell commands.
 
@@ -67,6 +72,7 @@ Example:
 :) echo "echo 'hello'" | ./hsh
    'hello'
 :)
+```
 
 If the shell is invoked with standard input connected to a terminal, an interactive shell is opened. When executing interactively, the simple shell  displays the prompt :) when it is ready to read a command.
 
@@ -75,6 +81,7 @@ Example:
 ```
 :) ./hsh
 :)
+```
 
 **Environemt**
 
