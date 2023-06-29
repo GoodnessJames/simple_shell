@@ -65,7 +65,7 @@ int run_commands(char *path, int *ret)
 	if (!line)
 		return (-1);
 	do {
-		bytes = read(file, buffer, 119);
+		bytes = read(file, buffer, 127);
 		if (bytes == 0 && line_size == 0)
 			return (*ret);
 		buffer[bytes] = '\0';
