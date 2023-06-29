@@ -72,6 +72,7 @@ int _setenv(char **args, char __attribute__((__unused__)) **arg0)
 	free(environ);
 	environ = environ_array;
 	environ[i] = new_env;
+	environ[i + 1] = NULL;
 
 	return (0);
 }
@@ -115,5 +116,7 @@ int _unsetenv(char **args, char __attribute__((__unused__)) **arg0)
 	}
 	free(environ);
 	environ = new_env;
+	environ[size - 1] = NULL;
+
 	return (0);
 }
