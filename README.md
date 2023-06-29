@@ -276,8 +276,8 @@ The logical operators **&&** and **||** have equal precedence, followed by **;**
 ## Conclusion
 
 ## Authors
-- [Akoma Goodness James] (https://github.com/GoodnessJames)
-- Nna Ginika Elizabeth (https://github.com/Giniks)
+- [Akoma Goodness James](https://github.com/GoodnessJames)
+- [Nna Ginika Elizabeth](https://github.com/Giniks)
   
 ## Acknowledgements
 This project was written as part of the curriculum for ALX School as a requirement to achieve a milestone and commence the second sprint in software engineering.
