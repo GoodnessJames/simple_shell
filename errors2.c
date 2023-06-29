@@ -30,8 +30,8 @@ char *error126(char **args)
 	_strcat(error, ": ");
 	_strcat(error, args[0]);
 	_strcat(error, ": Permission denied\n");
-	free(histStr);
 
+	free(histStr);
 	return (error);
 }
 
@@ -64,7 +64,7 @@ char *error127(char **args)
 	_strcat(error, ": ");
 	_strcat(error, args[0]);
 	_strcat(error, ": not found\n");
-	free(histStr);
 
+	free(histStr);
 	return (error);
 }
