@@ -110,9 +110,9 @@ The simple shell can be invoked both interactively and non-interactively. If the
 
 Example:
 ```
-:) echo "/bin/ls" | ./shell
+$ echo "/bin/ls" | ./shell
 hsh main.c shell.h str_func1.c
-:)
+$
 ```
 
 If the shell is invoked with standard input connected to a terminal, an interactive shell is opened. When executing interactively, the simple shell  displays the prompt :) when it is ready to read a command.
@@ -120,7 +120,7 @@ If the shell is invoked with standard input connected to a terminal, an interact
 Example:
 
 ```
-:) ./shell
+$ ./shell
 :)
 ```
 
@@ -181,7 +181,7 @@ $
 ```
 
 ### Variable Replacement
-This feature allows the substitution of the value of a variable within a string or command. The simple shell interprets the $ character for variable replacement.
+This feature allows the substitution of the value of a variable within a string or command. The simple shell interprets the character "$" for variable replacement.
 
 Example:
 
@@ -192,7 +192,7 @@ $ echo "echo $PWD" | ./shell
 
 **$?**
 
-? is substituted with the return value of the last program executed.
+The character "?" is substituted with the return value of the last program executed.
 
 Example:
 
@@ -242,7 +242,7 @@ Due to the non-existent file (strings.c), the **rm** command will fail, and the 
 
 **Logical 'OR' Operator (||)**
 
-Given: command1 || command2; command2 is executed only if command1 returns a non-zero exit status (ie if command1 returns a TRUE value).
+Given: command1 || command2; command2 is executed even if command1 returns a non-zero exit status.
 
 **Here's a demonstration:**
 
@@ -259,11 +259,92 @@ The logical operators **&&** and **||** have equal precedence, followed by **;**
 ### Simple Shell Buitin Commands
 
 **cd**
-**exit**
-**env**
-**setenv**
-**unsetenv**
+- **Usage:** `cd DIRECTORY`
+- **Description:** Changes the current directory of the process to the specified `DIRECTORY`.
+- If no argument is provided, the command is interpreted as `cd $HOME`, which navigates to the user's home directory. 
+- If the argument `-` is provided, the command is interpreted as `cd $OLDPWD`, and the pathname of the new working directory is displayed on the standard output. 
+- If the argument `--` is given, the command is interpreted as `cd $OLDPWD`, but the pathname of the new working directory is not displayed. 
+- After a directory change, the environment variables `PWD` and `OLDPWD` are updated accordingly.
 
+**Here's a demonstration:**
+
+```
+$ ./shell
+:) pwd
+/root/simple_shell
+:) cd
+:) pwd
+/root
+:) cd -
+:) pwd
+/root/simple_shell
+```
+**exit**
+- **Usage:** `exit [STATUS]
+- **Description:** Exits the shell. 
+- The `STATUS` argument is an integer that determines the exit status of the shell. When `exit` is called with a specific `STATUS`, the shell terminates with that exit status. 
+- If no `STATUS` argument is provided, the command is interpreted as `exit 0`, which means the shell exits with a successful status (0 indicating success).
+
+**Here's a demonstration:**
+
+```
+$ ./shell
+:) exit
+$
+```
+**env**
+- **Usage:** `env`
+- **Description:** Prints the current environment.
+- The `env` command is used to display the current environment variables and their values. When executed without any arguments, it retrieves and prints the complete set of environment variables currently in effect.
+- The output typically includes information such as system-specific variables, user-specific variables, and variables set by the shell or the user's login scripts.
+
+
+**Here's a demonstration:**
+
+```
+$ ./shell
+:) env
+HOSTNAME=3a7be2967852
+LANGUAGE=en_US:en
+PWD=/root/simple_shellTZ=America/Los_Angeles
+HOME=/rootLANG=en_US.UTF-8
+...
+```
+**setenv**
+- Usage: `setenv [VARIABLE] [VALUE]`
+- Description: Initializes a new environment variable or modifies an existing one.
+- The `setenv` command is used to set or modify environment variables. 
+- It takes two arguments: `[VARIABLE]` represents the name of the variable, and `[VALUE]` represents the desired value to assign to the variable. 
+- If the variable does not exist, `setenv` creates a new environment variable with the specified name and assigns it the provided value. 
+- If the variable already exists, `setenv` modifies its value to the provided value.
+- In case of failure, such as when encountering a permission issue or other errors, `setenv` outputs an appropriate error message to the standard error `(stderr)` stream.
+
+**Here's a demonstration:**
+
+```
+$ ./shell
+:) setenv NAME Eva
+:) echo $NAME
+Eva
+```
+**unsetenv**
+- **Usage:** `unsetenv [VARIABLE]`
+- Description: Removes an environment variable.
+- The `unsetenv` command is used to remove an environment variable. It takes one argument: `[VARIABLE]`, which represents the name of the variable to be removed. 
+- When executed,` unsetenv` removes the specified environment variable from the current environment. 
+- If the variable does not exist, no action is taken. 
+- In case of failure, such as encountering a permission issue or other errors, `unsetenv` outputs an appropriate error message to the standard error `(stderr)` stream.
+
+**Here's a demonstration:**
+
+```
+$ ./shell
+:) setenv NAME Eva
+:) Unsetenv NAME
+:) echo $NAME
+
+$
+```
 
 ## Conclusion
 
