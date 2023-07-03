@@ -216,11 +216,13 @@ The simple shell interprets the following operator characters:
 Sequential execution takes place in the simple shell when commands are separated by a semicolon (;).
 
 Example:
-
-$ echo "echo 'hello' ; echo 'bonjour'" | ./shell
-'hello'
-'bonjour'
-
+```
+:) echo Hello ; echo World ; echo !
+Hello
+World
+!
+:)
+```
 **Logical 'AND' Operator (&&)**
 
 In the simple shell, when using the syntax "command1 && command2", command2 is executed only if command1 returns an exit status of zero.
@@ -297,7 +299,6 @@ $
 - **Description:** Prints the current environment.
 - The `env` command is used to display the current environment variables and their values. When executed without any arguments, it retrieves and prints the complete set of environment variables currently in effect.
 - The output typically includes information such as system-specific variables, user-specific variables, and variables set by the shell or the user's login scripts.
-
 
 **Here's a demonstration:**
 
