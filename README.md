@@ -282,7 +282,7 @@ $ ./shell
 /root/simple_shell
 ```
 **exit**
-- **Usage:** `exit [STATUS]
+- **Usage:** `exit [STATUS]`
 - **Description:** Exits the shell. 
 - The `STATUS` argument is an integer that determines the exit status of the shell. When `exit` is called with a specific `STATUS`, the shell terminates with that exit status. 
 - If no `STATUS` argument is provided, the command is interpreted as `exit 0`, which means the shell exits with a successful status (0 indicating success).
