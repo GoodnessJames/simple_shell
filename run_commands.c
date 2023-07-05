@@ -5,7 +5,7 @@ int run_commands(char *path, int *ret);
 
 /**
  * fileopen_error - Prints "can't open" if the file doesn't exist or
- *					lacks proper permissions
+ *		    lacks proper permissions
  * @path: Path to the file
  *
  * Return: Returns (127)
@@ -43,9 +43,9 @@ int fileopen_error(char *path)
  * @path: Path to the file
  * @ret: Return value of the last executed command
  *
- * Return: On SUCCESS, return value of the last command ran
- *		   On FAILURE, returns 127 if file can't be opened
- *						Returns -1 if  malloc fails
+ * Return: On SUCCESS, returns value of the last command ran
+ *	   On FAILURE, returns 127 if the file can't be opened
+ *	   Returns -1 if  malloc fails
  */
 int run_commands(char *path, int *ret)
 {
@@ -110,7 +110,6 @@ int run_commands(char *path, int *ret)
 			i = 0;
 		}
 	}
-
 	ret_val = call_args(args, arg0, ret);
 
 	free(arg0);
