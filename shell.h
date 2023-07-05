@@ -4,7 +4,7 @@
 /*
  * File: shell.h
  * Desc: This file contains prototypes for all the functions & struct
- *		 required for the project - (0x16. C - Simple Shell)
+ *	 required for the project - (0x16. C - Simple Shell)
  */
 
 /* Macro definition for EXIT & EOF markers */
@@ -33,7 +33,7 @@ int cmdhistory;
 /**
  * struct list_path - A struct type defining a linked list
  * @dir: The directory path
- * @next: A pointer to next node
+ * @next: A pointer to the next node
  */
 typedef struct list_path
 {
@@ -52,7 +52,7 @@ typedef struct builtins
 	int (*fpt)(char **, char **);
 } builtins;
 
-/* Function Protypes required for the tasks */
+/* Function Prototypes required for the tasks */
 void _setlineptr(char **lineptr, size_t *n, char *buffer, size_t b);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
