@@ -5,7 +5,7 @@
  * @args: An array of arguments passed to the command line
  *
  * Return: On SUCCESS, returns (error) ie the error string
- *		   On FAILURE, returns (NULL)
+ *	   On FAILURE, returns (NULL)
  */
 char *env_error(char **args)
 {
@@ -39,7 +39,7 @@ char *env_error(char **args)
  * @args: An array of arguments passed to the command line
  *
  * Return: On SUCCESS, returns (error) ie the error string
- *		   On FAILURE, returns (NULL)
+ *	   On FAILURE, returns (NULL)
  */
 char *exit_error(char **args)
 {
@@ -73,7 +73,7 @@ char *exit_error(char **args)
  * @args: An array of arguments passed to the command line
  *
  * Return: On SUCCESS, returns (error) ie the error string
- *		   On FAILURE, returns (NULL)
+ *	   On FAILURE, returns (NULL)
  */
 char *cd_error(char **args)
 {
@@ -112,7 +112,7 @@ char *cd_error(char **args)
  * @args: An array of arguments passed to the command line
  *
  * Return: On SUCCESS, returns (error) ie the error string
- *		   On FAILURE, returns (NULL)
+ *	   On FAILURE, returns (NULL)
  */
 char *syntax_error(char **args)
 {
