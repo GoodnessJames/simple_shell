@@ -21,9 +21,9 @@ Developing a command line interpreter is an excellent project for learning progr
 The simple shell program allows command input, execution, and effective error handling for invalid commands. The simple shell when invoked displays a prompt ready to accept input from the user and after execution, the prompt is displayed again.
 
 ### Basic Terminologies used in the Simple Shell Program
-- **Commands:** These are specific instructions given to the CLI (shell) to perform an action. Few examples of shell commands includes: pwd, ls, cd, etc.
-- **Arguments:** Argumets are additional pieces of information provided to a shell program to modify its behaviour. Arguments follow the commands and are seperated by spaces. Example: ls -l (The -l argument tells the `ls` command to display a detailed information about files and directories).
-- **Options:** Options are also known as flags. Options/flags are special types of arguments that modify the behaviour of a command. They start with a hyphen or double hyphen and are often preceded by a single letter or word. Example: rm -i (interactive removing of a file).
+- **Commands:** These are specific instructions given to the CLI (shell) to perform an action. A few examples of shell commands include pwd, ls, cd, etc.
+- **Arguments:** Arguments are additional pieces of information provided to a shell program to modify its behavior. Arguments follow the commands and are separated by spaces. Example: ls -l (The -l argument tells the `ls` command to display detailed information about files and directories).
+- **Options:** Options are also known as flags. Options/flags are special types of arguments that modify the behavior of a command. They start with a hyphen or double hyphen and are often preceded by a single letter or word. Example: rm -i (interactive removing of a file).
 
 ### Key Functionalities of the Simple Shell:
 - Displays a prompt ": ) " and waits for user input.
@@ -243,7 +243,7 @@ Due to the non-existent file (strings.c), the **rm** command will fail, and the 
 
 **Logical 'OR' Operator (||)**
 
-Given: command1 || command2; command2 is executed even if command1 returns a non-zero exit status.
+Given: command1 || command2; command2 is executed even if command1 returns a non-zero exit status. In other words, command2 will still be executed even if command1 fails to execute. As long as either of the commands returns an exit status of zero, indicating success, the execution will proceed.
 
 **Here's a demonstration:**
 ```
