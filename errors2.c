@@ -5,7 +5,7 @@
  * @args: An array of arguments passed to the command line
  *
  * Return: On SUCCESS, returns (error) ie the error string
- *		   On FAILURE, returns (NULL)
+ *	   On FAILURE, returns (NULL)
  *
  */
 char *error126(char **args)
@@ -40,7 +40,7 @@ char *error126(char **args)
  * @args: An array of arguments passed to the command line
  *
  * Return: On SUCCESS, returns (error) ie the error string
- *		   On FAILURE, returns (NULL)
+ *	   On FAILURE, returns (NULL)
  */
 char *error127(char **args)
 {
