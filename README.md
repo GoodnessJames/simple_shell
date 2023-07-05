@@ -1,7 +1,6 @@
 # Project Title: Simple Shell (Simple Command Line Interpreter)
 
-![Screenshot (14)](https://github.com/GoodnessJames/simple_shell/assets/128673364/ca76f971-9a8b-4dec-9b33-7b2490a50b1d)
-
+![Screenshot (16)](https://github.com/GoodnessJames/simple_shell/assets/128673364/4a331f6d-66fa-4e23-9331-8068be923f3c)
 
 ## Overview
 This project entails building a command line interpreter that reads commands from either a file or standard input and executes them just like the Unix Shell.
