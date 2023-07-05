@@ -1,14 +1,29 @@
 # Project Title: Simple Shell (Simple Command Line Interpreter)
 
-![Screenshot (16)](https://github.com/GoodnessJames/simple_shell/assets/128673364/4a331f6d-66fa-4e23-9331-8068be923f3c)
+![Screenshot (18)](https://github.com/GoodnessJames/simple_shell/assets/128673364/490c2927-252f-4c25-a9d5-d755cbaed87e)
 
 ## Overview
 This project entails building a command line interpreter that reads commands from either a file or standard input and executes them just like the Unix Shell.
 
+## What is a Command Line Interpreter (CLI) and its Relevance over Graphic User Interface (GUI)?
+A command line interpreter, also known as a command line shell or simply a shell, is a program that provides a command line interface (CLI) for users to interact with a computer system or software. It interprets the commands entered by the user and executes them accordingly. Common examples of command line interpreters include Bash (Bourne Again SHell) on Unix-like systems, Command Prompt (cmd.exe) on Windows, and PowerShell on Windows systems. 
 
+A graphic user interface (GUI) on the other hand is a type of user interface that allows users to interact with electronic devices or software through graphical elements such as icons, buttons, windows, and menus.
 
-## Simple Shell Description
-The simple shell allows command input, execution, and effective error handling for invalid commands. The custom shell when invoked displays a prompt ready to accept input from the user and after execution, the prompt is displayed again.
+### Relevance of CLI over GUI
+- With command line interfaces, users can perform tasks quickly by typing commands and utilizing keyboard shortcuts, eliminating the need for mouse movements and navigating through menus.
+- Command line interfaces allow for efficient batch processing and automation of repetitive tasks, saving time and effort.
+- Command line interfaces, such as SSH (Secure Shell), allow users to remotely access and administer systems, execute commands, and perform system maintenance without the need for a graphical interface.
+
+## Why Build a Simple Shell?
+Developing a command line interpreter is an excellent project for learning programming concepts and language features. It involves handling user input, parsing commands, executing functions, and displaying output. It enables us to gain a deeper understanding of how programs interact with users.
+
+The simple shell program allows command input, execution, and effective error handling for invalid commands. The simple shell when invoked displays a prompt ready to accept input from the user and after execution, the prompt is displayed again.
+
+## Basic Terminologies used in the Simple Shell Program
+- **Commands:** These are specific instructions given to the CLI (shell) to perform an action. Few examples of shell commands includes: pwd, ls, cd, etc.
+- **Arguments:** Argumets are additional pieces of information provided to a shell program to modify its behaviour. Arguments follow the commands and are seperated by spaces. Example: ls -l (The -l argument tells the `ls` command to display a detailed information about files and directories).
+- **Options:** Options are also known as flags. Options/flags are special types of arguments that modify the behaviour of a command. They start with a hyphen or double hyphen and are often preceded by a single letter or word. Example: rm -i (interactive removing of a file).
 
 ### Key Functionalities of the Simple Shell:
 - Displays a prompt ": ) " and waits for user input.
@@ -16,7 +31,7 @@ The simple shell allows command input, execution, and effective error handling f
 - Runs the following built_in commands: exit, env, setenv, and unsetenv.
 - Handles commands with arguments.
 - Handles the PATH global variable.
-- Handles The EOF (End Of File) condition.
+- Handles The EOF (End-of-File) condition.
 - Handles the Ctrl + C signal
 
 ### How to Use the Simple Shell:
