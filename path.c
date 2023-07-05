@@ -7,7 +7,7 @@ list_path *get_path(char *path);
  * find_path - Locates a command in the PATH
  * @cmd: The command to locate
  *
- * Return: On SUCCESS, returns the full path of the command and NULL on failure
+ * Return: On SUCCESS, returns the full path of the command and NULL on FAILURE
  */
 char *find_path(char *cmd)
 {
