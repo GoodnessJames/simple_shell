@@ -1,4 +1,4 @@
-# Project Title: Simple Shell (Simple Command Line Interpreter)
+# Simple Shell (Simple Command Line Interpreter)
 
 ![Screenshot (18)](https://github.com/GoodnessJames/simple_shell/assets/128673364/490c2927-252f-4c25-a9d5-d755cbaed87e)
 
