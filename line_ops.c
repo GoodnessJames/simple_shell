@@ -92,13 +92,12 @@ void split_line(char **line, ssize_t len)
 }
 
 /**
- * newLen - Obtains the new length of a line seperated by
+ * newLen - Obtains the new length of a line separated by
  *			";", "||", "&&&", or "#"
  * @line: The line to obtain the length
  *
  * Return: Returns the new length of the line
  */
-
 ssize_t newLen(char *line)
 {
 	size_t i;
@@ -150,6 +149,7 @@ ssize_t newLen(char *line)
 	}
 	return (new_len);
 }
+
 /**
  * logical_ops - Checks a line for logical operators "||" or "&&".
  * @line: A pointer to the character to check in the line.
