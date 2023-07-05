@@ -1,14 +1,11 @@
 # Project Title: Simple Shell (Simple Command Line Interpreter)
 
+![Screenshot (13)](https://github.com/GoodnessJames/simple_shell/assets/128673364/ebdf2cc3-008e-4c8a-a7c0-5f2c882bf752)
+
 ## Overview
 This project entails building a command line interpreter that reads commands from either a file or standard input and executes them just like the Unix Shell.
 
-## The Unix Shell
-The Unix shell runs a shell script through the command line such as file manipulation, printing, and execution. The shell takes up the form of a command line interpreter. It accepts commands from users, reads, interprets, and executes the built-in shell command and programs.
 
-Unix shell has built-in shell commands that can be used to create directories, list files, print output, modify permission, and even write text.
-
-The shell's environment accommodates variables that can be used in the script and also in the command line interface (variables like path, user settings, and configuration data).
 
 ## Simple Shell Description
 The simple shell allows command input, execution, and effective error handling for invalid commands. The custom shell when invoked displays a prompt ready to accept input from the user and after execution, the prompt is displayed again.
