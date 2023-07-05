@@ -20,7 +20,7 @@ Developing a command line interpreter is an excellent project for learning progr
 
 The simple shell program allows command input, execution, and effective error handling for invalid commands. The simple shell when invoked displays a prompt ready to accept input from the user and after execution, the prompt is displayed again.
 
-## Basic Terminologies used in the Simple Shell Program
+### Basic Terminologies used in the Simple Shell Program
 - **Commands:** These are specific instructions given to the CLI (shell) to perform an action. Few examples of shell commands includes: pwd, ls, cd, etc.
 - **Arguments:** Argumets are additional pieces of information provided to a shell program to modify its behaviour. Arguments follow the commands and are seperated by spaces. Example: ls -l (The -l argument tells the `ls` command to display a detailed information about files and directories).
 - **Options:** Options are also known as flags. Options/flags are special types of arguments that modify the behaviour of a command. They start with a hyphen or double hyphen and are often preceded by a single letter or word. Example: rm -i (interactive removing of a file).
