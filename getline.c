@@ -7,7 +7,7 @@
  * @new_size: The size in bytes allocated to the new memory block
  *
  * Return: On SUCCESS, returns (newMem) ie the pointer to the new memory block
- *		   On FAILURE, returns (ptr) if new_size == old_size and (NULL)
+ *	   On FAILURE, returns (ptr) if new_size == old_size and (NULL)
  */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
