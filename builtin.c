@@ -36,8 +36,8 @@ int (*checkbuiltin(char *cmd))(char **args, char **arg0)
  * @arg0: A double pointer to the start of the arguments
  *
  * Return: On SUCCESS, exits with the given status value
- *		   On FAILURE,	returns (-3) if there are no arguments
- *						returns (-2) if the exit value is invalid
+ *	   On FAILURE,	returns (-3) if there are no arguments
+ *	   returns (-2) if the exit value is invalid
  */
 int shellexit(char **args, char **arg0)
 {
@@ -77,8 +77,8 @@ int shellexit(char **args, char **arg0)
  * @arg0: A double pointer to the beginning of args
  *
  * Return: On SUCCESS,	returns (0)
- *		   On FAILURE,	returns (-2) if the string is not a directory
- *						returns (-1) if an error occurs
+ *	   On FAILURE,	returns (-2) if the string is not a directory
+ *	   returns (-1) if an error occurs
  */
 int _cd(char **args, char __attribute__((__unused__)) **arg0)
 {
