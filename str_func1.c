@@ -2,7 +2,7 @@
 
 /**
  * _strlen - Returns the length of a string
- * @str: A pointer to the characters string.
+ * @str: A pointer to the characters string
  *
  * Return: The length of the character string.
  */
@@ -36,7 +36,7 @@ char *_strcpy(char *dest, const char *src)
 }
 
 /**
- * _strcat - Concantenates two strings
+ * _strcat - Concatenates two strings
  * @dest: The destination string
  * @src: The source string
  *
@@ -55,7 +55,7 @@ char *_strcat(char *dest, const char *src)
 }
 
 /**
- * _strncat - Concantenates n bytes of two strings
+ * _strncat - Concatenates n bytes of two strings
  * @dest: The destination string
  * @src: The source string
  * @n: n bytes to copy from src
