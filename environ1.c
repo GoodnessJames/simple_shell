@@ -6,7 +6,7 @@
  * @arg0: A double pointer to the start of arguments
  *
  * Return: On SUCCESS,	returns (0)
- *		   On FAILURE,	returns (-1) to indicate an error occurred
+ *	   On FAILURE,	returns (-1) to indicate an error occurred
  */
 int _printenv(char **args, char __attribute__((__unused__)) **arg0)
 {
@@ -31,7 +31,7 @@ int _printenv(char **args, char __attribute__((__unused__)) **arg0)
  * @arg0: A double pointer to the start of arguments
  *
  * Return: On SUCCESS, returns (0)
- *		   On FAILURE, returns (-1) to indicate an error occurred
+ *	   On FAILURE, returns (-1) to indicate an error occurred
  */
 int _setenv(char **args, char __attribute__((__unused__)) **arg0)
 {
@@ -78,12 +78,12 @@ int _setenv(char **args, char __attribute__((__unused__)) **arg0)
 }
 
 /**
- * _unsetenv - Deletes an environmental variable from the PATH.
+ * _unsetenv - Deletes an environment variable from the PATH.
  * @args: An array of arguments passed to the shell.
  * @arg0: A double pointer to the beginning of args
  *
  * Return: On SUCCESS, returns (0)
- *		   On FAILURE, returns (-1) to indicate an error occurred
+ *	   On FAILURE, returns (-1) to indicate an error occurred
  */
 int _unsetenv(char **args, char __attribute__((__unused__)) **arg0)
 {
