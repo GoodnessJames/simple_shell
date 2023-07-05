@@ -6,7 +6,7 @@ char **_strtok(char *line, char *delim);
 
 /**
  * _toklen - Finds the delimiter marking the end of a string
- * @str: The string to be obtain the len
+ * @str: The string to obtain the len
  * @delim: The delimiter
  *
  * Return: Returns (len) ie the delimiter len
@@ -45,7 +45,6 @@ int _tokcount(char *str, char *delim)
 			i += _toklen(str + i, delim);
 		}
 	}
-
 	return (tokens);
 }
 
