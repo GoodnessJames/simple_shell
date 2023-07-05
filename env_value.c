@@ -24,7 +24,7 @@ void free_args(char **args, char **arg0)
  * get_pid - Gets the current process ID of the shell
  *
  * Return: On SUCCESS, returns (pid) ie the current process ID
- *		   On FAILURE, returns (NULL)
+ *	   On FAILURE, returns (NULL)
  */
 char *get_pid(void)
 {
@@ -54,12 +54,12 @@ char *get_pid(void)
 }
 
 /**
- * env_value - Gets the value associated to an environment variable
+ * env_value - Gets the value associated with an environment variable
  * @var: The environment variable to search for
  * @len: The length of the environment variable to search for
  *
  * Return: On SUCCESS, returns (env_fetched) ie the value of the env variable
- *		   On FAILURE, returns (NULL) to indicate env variable is not found
+ *	   On FAILURE, returns (NULL) to indicate env variable is not found
  *
  */
 char *env_value(char *var, int len)
