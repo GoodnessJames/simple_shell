@@ -33,7 +33,7 @@ int digitlen(int n)
  * @n: The integer to convert
  *
  * Return: On SUCCESS, returns (str) ie the converted string
- *		   On FAILURE, returns (NULL)
+ *	   On FAILURE, returns (NULL)
  */
 char *_itoa(int n)
 {
@@ -64,7 +64,6 @@ char *_itoa(int n)
 
 	return (str);
 }
-
 
 /**
  * _error - Writes a custom error message to standard error (stderr)
