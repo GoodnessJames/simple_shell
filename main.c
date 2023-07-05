@@ -4,8 +4,8 @@ void check_sig(int sig);
 int execute(char **args, char **arg0);
 int main(int ac, char **av);
 /**
- * check_sig - Verifies if Ctrl C key combination is pressed
- *				 and rints a new prompt upon a signal
+ * check_sig - Verifies if Ctrl+C key combination is pressed
+ *	       and prints a new prompt upon a signal
  * @sig: The signal
  */
 void check_sig(int sig)
@@ -23,7 +23,7 @@ void check_sig(int sig)
  * @arg0: A 2D pointer to the start of args
  *
  * Return: On SUCCESS, returns the exit value of the last executed command
- *			If an error occurs returns the associated error code
+ *	   If an error occurs returns the associated error code
  */
 int execute(char **args, char **arg0)
 {
