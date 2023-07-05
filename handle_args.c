@@ -12,7 +12,7 @@ int check_args(char **args);
  * @ret: The return value of the last executed command
  *
  * Return: On SUCCESS, returns (line) ie a pointer to the stored command
- *		   On FAILURE, returns (NULL) to indicate an error occured
+ *	   On FAILURE, returns (NULL) to indicate an error occurred
  */
 char *get_args(char *line, int *ret)
 {
@@ -42,10 +42,10 @@ char *get_args(char *line, int *ret)
 }
 
 /**
- * call_args - Seperates operators from commands and calls the commands
+ * call_args - Separates operators from commands and calls the commands
  * @args: An array of arguments
  * @arg0: A 2D pointer to the start of args
- * @ret: The return value of last executed command of the parent process
+ * @ret: The return value of the last executed command of the parent process
  *
  * Return: Returns the return value of the last executed command
  */
@@ -100,7 +100,7 @@ int call_args(char **args, char **arg0, int *ret)
  * run_args - Calls the execution of a command
  * @args: An array of arguments
  * @arg0: A 2D pointer to the start of args
- * @ret: The return value of last executed command of the parent process
+ * @ret: The return value of the last executed command of the parent process
  *
  * Return: Returns the return value of the last executed command
  */
@@ -131,10 +131,10 @@ int run_args(char **args, char **arg0, int *ret)
 
 /**
  * handle_args - Gets, calls, and runs the execution of a command
- * @ret: The return value of last executed command of the parent process
+ * @ret: The return value of the last executed command of the parent process
  *
  * Return: If end-of-file is read, returns _EOF
- *         If input cannot be tokenized, returns -1
+ *         If the input cannot be tokenized, returns -1
  *         Otherwise returns the exit value of the last executed command
  */
 int handle_args(int *ret)
@@ -180,7 +180,7 @@ int handle_args(int *ret)
  * @args: 2D pointer to tokenized commands and arguments
  *
  * Return: Returns (0) on SUCCESS
- *		   Returns (-2) if ';', '&&', or '||' is placed at an invalid position
+ *	   Returns (-2) if ';', '&&', or '||' is placed at an invalid position
  */
 int check_args(char **args)
 {
