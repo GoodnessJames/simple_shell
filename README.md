@@ -135,7 +135,6 @@ Example:
 $ ./shell
 :)
 ```
-
 ### Environment
 The environment is an array of name-value strings describing variables in the format - NAME=VALUE. Upon invocation, the simple shell receives and copies the environment of the parent process in which it was executed. A few key environmental variables are:
 
@@ -147,7 +146,6 @@ The HOME environment variable refers to the directory path that serves as the ho
 $ echo "echo $HOME" | ./shell
 /root
 ```
-
 **PWD**
 
 The PWD environment variable stands for "Present Working Directory." It stores the absolute path of the current directory or folder in which a process or shell session is operating. Testing the PWD environment variable of the shell in interactive mode:
@@ -156,7 +154,6 @@ The PWD environment variable stands for "Present Working Directory." It stores t
 :) echo $OLDPWD
 /home/vagrant/ALX
 ```
-
 **PATH**
 
 This is a colon-separated list of directories in which the shell looks for commands. 
@@ -165,10 +162,8 @@ This is a colon-separated list of directories in which the shell looks for comma
 $ echo "echo $PATH" | ./shell
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
-
 ### Command Execution
 Once a command is received, the simple shell tokenizes it by splitting it into individual words using a space (" ") as a delimiter. The first word is identified as the command itself, while the remaining words are recognized as arguments for that specific command. Subsequently, the simple shell proceeds with the subsequent actions outlined below:
-
 - If the command's first character is neither a slash (/) nor a dot (.), the simple shell initiates a search for it within the list of shell builtins. If a shell built-in with a matching name is found, it is invoked and executed.
 - If the first character of the command is not a slash (/), dot (.), or a shell built-in, the simple shell proceeds to search each directory specified in the PATH environment variable. The purpose of this search is to locate a directory containing an executable file with a matching name.
 - If the first character of the command is a slash (/) or a dot (.) or if any of the previous searches are successful, the simple shell proceeds to execute the named program. Any remaining arguments provided are included in the execution process within a separate execution environment.
@@ -184,24 +179,20 @@ For built-in commands, a return status of zero indicates success, while a value 
 When operating in interactive mode, the simple shell prints a new prompt upon the signal - Ctrl+C from keyboard input. However, if the input of end-of-file (Ctrl+D) is detected, the program will be terminated and exited.
 
 Below, the user presses Ctrl+C twice and hits Ctrl+D in the third line.
-
 ```
 $ ./shell
 :) ^C
 :) ^C
 $
 ```
-
 ### Variable Replacement
 This feature allows the substitution of the value of a variable within a string or command. The simple shell interprets the character "$" for variable replacement.
 
 Example:
-
 ```
 $ echo "echo $PWD" | ./shell
 /root/simple_shell
 ```
-
 **$?**
 
 The character "?" is substituted with the return value of the last program executed.
@@ -212,14 +203,12 @@ Example:
 $ echo "echo $?" | ./shell
 0
 ```
-
 ### Comments
 The shell ignores all words and characters preceded by a "#" character on a line.
 
 ```
 $ echo "echo 'hello' #this will be ignored!" | ./shell 'hello'
 ```
-
 ### Operators
 The simple shell interprets the following operator characters:
 
@@ -244,7 +233,6 @@ Example:
 Consider the scenario where you attempt to remove a non-existent file from your directory using the **'rm'** command. Additionally, you want to display the message "File removed successfully" on the screen using the **'echo'** command. In this case: **rm** is referred to as **command1**. **echo** "File removed successfully" is referred to as **command2**. However, since the file you are trying to remove does not exist, the **rm** command fails to execute and does not return an exit status of **zero** to indicate **success**. Consequently, **command2** (the echo command) will not be executed. 
 
 **Here's a demonstration:**
-
 ```
 :) ls
 main.c shell.h
@@ -253,13 +241,11 @@ rm: cannot remove 'strings.c': No such file or directory
 ```
 Due to the non-existent file (strings.c), the **rm** command will fail, and the subsequent echo command will not be executed. As a result, you will not see the "File removed successfully" message displayed on the screen.
 
-
 **Logical 'OR' Operator (||)**
 
 Given: command1 || command2; command2 is executed even if command1 returns a non-zero exit status.
 
 **Here's a demonstration:**
-
 ```
 :) ls
 main.c shell.h
@@ -267,8 +253,7 @@ main.c shell.h
 rm: cannot remove 'strings.c': No such file or directory
 "File removed successfully"
 ```
-
-The logical operators **&&** and **||** have equal precedence, followed by **;**.
+The logical operators `&&` and `||` have equal precedence, followed by `;`.
 
 ### Simple Shell Buitin Commands
 
@@ -281,7 +266,6 @@ The logical operators **&&** and **||** have equal precedence, followed by **;**
 - After a directory change, the environment variables `PWD` and `OLDPWD` are updated accordingly.
 
 **Here's a demonstration:**
-
 ```
 $ ./shell
 :) pwd
@@ -300,7 +284,6 @@ $ ./shell
 - If no `STATUS` argument is provided, the command is interpreted as `exit 0`, which means the shell exits with a successful status (0 indicating success).
 
 **Here's a demonstration:**
-
 ```
 $ ./shell
 :) exit
@@ -313,7 +296,6 @@ $
 - The output typically includes information such as system-specific variables, user-specific variables, and variables set by the shell or the user's login scripts.
 
 **Here's a demonstration:**
-
 ```
 $ ./shell
 :) env
@@ -333,7 +315,6 @@ HOME=/rootLANG=en_US.UTF-8
 - In case of failure, such as when encountering a permission issue or other errors, `setenv` outputs an appropriate error message to the standard error `(stderr)` stream.
 
 **Here's a demonstration:**
-
 ```
 $ ./shell
 :) setenv NAME Eva
@@ -349,7 +330,6 @@ Eva
 - In case of failure, such as encountering a permission issue or other errors, `unsetenv` outputs an appropriate error message to the standard error `(stderr)` stream.
 
 **Here's a demonstration:**
-
 ```
 $ ./shell
 :) setenv NAME Eva
@@ -359,7 +339,6 @@ $ ./shell
 $
 ```
 ## Conclusion
-
 In conclusion, we successfully developed a simple Unix-like command line interpreter, commonly referred to as a simple shell. It provides users with a text-based interface to execute commands, manage files and processes, and perform various operations. Throughout the project, we gained practical experience in systems programming and learned about system calls, process management, and file handling. While this shell is basic compared to more advanced versions, it serves as a solid foundation for future enhancements such as additional commands and scripting capabilities. Overall, this project allowed us to build a tool that enables efficient system interaction and command execution from the command line.
 
 ## Authors
