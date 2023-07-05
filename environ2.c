@@ -4,7 +4,7 @@
  * _envcopy - Creates a copy of the environment
  *
  * Return: On SUCCESS, returns (new_env) ie a 2D pointer to the new environ
- *		   On FAILURE, returns (NULL) to indicate an error occurred
+ *	   On FAILURE, returns (NULL) to indicate an error occurred
  */
 char **_envcopy(void)
 {
@@ -39,7 +39,7 @@ char **_envcopy(void)
 }
 
 /**
- * free_env - Frees the the environment copy
+ * free_env - Frees the environment copy
  *
  * Return: Returns nothing (void)
  */
