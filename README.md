@@ -60,53 +60,32 @@ access, chdir, close, closedir, execve, exit, fflush, fork, free, getcwd, getlin
 
 ## Flow of Program Execution
 The step-by-step stages of the execution of the shell program written in this project include:
-1. The main function is the entry point of the program. It takes two arguments: **ac** (argument count) and **av** (argument vector) which represent the command-line arguments passed to the program.
+1. The `main` function is the entry point of the program. It takes two arguments: `ac` (argument count) and `av` (argument vector which is an array of argument strings from the command line). `ac` and `av` represents the command-line arguments passed to the program.
+Several variables are declared, including `prompt` and `newline`, as pointers to `char`. `prompt` is initialized with the string `":) "`, which represents the prompt for the command line input. `newline` is initialized with the string `"\n"`, which represents a newline character.
 
-2. Several variables are declared, including **prompt** and **newline** which are character pointers initialized with specific strings, **ret_val** and **exec_retn** which are integers, and **ret** which is a pointer to an integer.
+2. Two integers are declared, `ret_val` (return value) and `exec_retn` (execution return). `ret_val` is initialized to `0`, and exec_retn is declared without initialization. Then, a pointer `ret` (return) is declared and assigned the address of `exec_retn`. This allows `ret` to store the value of `exec_retn` indirectly. `ret` is used to pass the value of the last executed command between different parts of the program.
 
-3. The value of **name** is assigned to **av[0]**, which is the name of the program itself, and the **cmdhistory** variable is set to 1.
+3. The value of `av[0]` (the first argument) is initialized to a global variable `name`. 
+The `cmdhistory` is a global variable used to store a flag or indicator for the command history. It is set to `1` to enable the command history count.
 
-4. The signal function is used to set up a signal handler for the SIGINT signal, which is generated when the user presses Ctrl+C. The **check_sig** function is specified as the signal handler.
+4. The signal handling function `check_sig` handles the `SIGINT` signal, which is sent to the program when the user presses `Ctrl+C`. 
+`0` is assigned to the value pointed to by `ret`, which is the value of `exec_retn`. Essentially, it initializes `exec_retn` to `0`.
 
-5. The value of **ret** is set to 0 and the **_envcopy** function is called to create a copy of the environment variables. The result is assigned to the **environ** variable.
+5. The `_envcopy` function is assigned to the `environ` variable. The _envcopy is a function responsible for copying the current environment variables.
 
-6. If the **environ** variable is NULL (indicating a failure to copy the environment variables), the program exits with a status code of -100.
+6. A conditional statement is set to check if `environ` is a null pointer. If it is, the program exits with a status code of `-100` to indicate failure.
 
-7. If the **ac** argument is not equal to 1 (indicating that command-line arguments were provided), the program proceeds to execute the code inside this block.
+7. The next conditional block that follows is executed if the number of command line arguments `(ac)` is not equal to `1`. The program then calls the `run_commands` function with `av[1]` (the second command line argument) and `ret` as arguments. It assigns the return value of `run_commands` to `ret_val`. After that, it calls `free_env()` to free any dynamically allocated environment variables, and finally, it returns the value pointed to by `ret`.
 
-8. Inside the block, the **run_commands** function is called with **av[1]** (the first command-line argument) and **ret** as arguments. The return value of **run_commands** is assigned to **ret_val**.
+8. The next conditional block is executed if the standard input file descriptor `(STDIN_FILENO)` is not associated with a terminal (for non-interactive input). It enters a loop where the `handle_args` function is repeatedly called until `ret_val ` is equal to` _EOF` or `EXIT`. Inside the loop, the return value of `handle_args` is assigned to `ret_val`. After exiting the loop, `free_env()` is called to free any dynamically allocated environment variables, and the value pointed to by `ret` is returned.
 
-9. The **free_env** function is called to free the memory allocated for the environment variables.
+9. If the conditions in the previous two blocks are not met, the program enters an infinite while loop that continuously prompts the user with the prompt string by writing it to the standard output file descriptor `(STDOUT_FILENO)`. 
 
-10. The value pointed to by **ret** is returned as the program's exit status.
+10. It then calls the `handle_args` function and assigns its return value to `ret_val`. A condition is set to check if `ret_val` is equal to `_EOF` or `EXIT` (in order to terminate the infinite loop), and an extra condition is set to check if it's `_EOF`, and if so, writes the `newline` character to the standard output. Then`free_env()` is called to free any dynamically allocated environment variables, and exits the program with the value pointed to by `ret` as the exit code.
 
-11. If the **ac** argument is equal to 1 and the standard input is not a terminal (checked using **isatty(STDIN_FILENO))**, the program proceeds to execute the code inside this block.
+11. After the loop is exited, the `free_env` function is called to free the memory allocated for the environment variables.
 
-12. Inside the block, the **handle_args** function is called repeatedly with **ret** as an argument until the return value **(ret_val)** is either _EOF or EXIT.
-
-13. The **free_env** function is called to free the memory allocated for the environment variables.
-
-14. The value pointed to by **ret** is returned as the program's exit status.
-
-15. If the conditions in the previous two blocks are not met, the program enters an infinite loop.
-
-16. Inside the loop, the **write** function is used to display the contents of the prompt string to the **standard output**.
-
-17. The **handle_args** function is called with ret as an argument, and the return value is assigned to **ret_val**.
-
-18. If the value of **ret_val** is either _EOF or EXIT, the program checks which one occurred.
-
-19. If **ret_val** is _EOF, the **newline** character is **written** to the standard output.
-
-20. The **free_env** function is called to free the memory allocated for the environment variables.
-
-21. The value pointed to by **ret** is used as the program's **exit status** and the program exits.
-
-22. If **ret_val** is EXIT, the program follows the same steps as in the previous step **(step 20)**.
-
-23. After the loop is exited, the **free_env** function is called to free the memory allocated for the environment variables.
-
-24. The value pointed to by **ret** is returned as the program's exit status.
+12. The value pointed to by `ret` is returned as the program's exit status.
 
 ## Testing and Validation
 The following presents the results of the simple shell test cases, confirming the expected functionality of the shell program:
