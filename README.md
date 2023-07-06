@@ -24,6 +24,9 @@ The simple shell program allows command input, execution, and effective error ha
 - **Commands:** These are specific instructions given to the CLI (shell) to perform an action. A few examples of shell commands include pwd, ls, cd, etc.
 - **Arguments:** Arguments are additional pieces of information provided to a shell program to modify its behavior. Arguments follow the commands and are separated by spaces. Example: ls -l (The -l argument tells the `ls` command to display detailed information about files and directories).
 - **Options:** Options are also known as flags. Options/flags are special types of arguments that modify the behavior of a command. They start with a hyphen or double hyphen and are often preceded by a single letter or word. Example: rm -i (interactive removing of a file).
+- **Prompt:** A prompt is a message or symbol displayed to the user to indicate that the system is ready to receive input. It typically appears as a text string or a specific character sequence at the beginning of a new line.
+
+A typical prompt in a UNIX-like system looks like this: `eva@DESKTOP-U7IC46B:~$`
 
 ### Key Functionalities of the Simple Shell:
 - Displays a prompt ": ) " and waits for user input.
