@@ -328,7 +328,8 @@ $
 ## Conclusion
 In conclusion, we successfully developed a simple Unix-like command line interpreter, commonly referred to as a simple shell. It provides users with a text-based interface to execute commands, manage files and processes, and perform various operations. Throughout the project, we gained practical experience in systems programming and learned about system calls, process management, and file handling. While this shell is basic compared to more advanced versions, it serves as a solid foundation for future enhancements such as additional commands and scripting capabilities. Overall, this project allowed us to build a tool that enables efficient system interaction and command execution from the command line.
 
-## Contributor
+## Contributors
+- [Akoma Goodness James](https://github.com/GoodnessJames)
 - [Nna Ginika Elizabeth](https://github.com/Giniks)
 
 ## Author
