@@ -122,7 +122,9 @@ The environment is an array of name-value strings describing variables in the fo
 
 **HOME**
 
-The HOME environment variable refers to the directory path that serves as the home directory for a user in a Unix-like operating system. It represents the default location where user-specific files and directories are stored. Testing the HOME environment variable of the shell in non-interactive mode:
+The HOME environment variable refers to the directory path that serves as the home directory for a user in a Unix-like operating system. It represents the default location where user-specific files and directories are stored. 
+
+Testing the HOME environment variable of the shell in non-interactive mode:
 
 ```
 $ echo "echo $HOME" | ./shell
@@ -130,7 +132,9 @@ $ echo "echo $HOME" | ./shell
 ```
 **PWD**
 
-The PWD environment variable stands for "Present Working Directory." It stores the absolute path of the current directory or folder in which a process or shell session is operating. Testing the PWD environment variable of the shell in interactive mode:
+The PWD environment variable stands for "Present Working Directory." It stores the absolute path of the current directory or folder in which a process or shell session is operating. 
+
+Testing the PWD environment variable of the shell in interactive mode:
 
 ```
 :) echo $OLDPWD
