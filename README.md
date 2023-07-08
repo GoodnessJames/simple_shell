@@ -109,7 +109,7 @@ hsh main.c shell.h str_func1.c
 $
 ```
 
-If the shell is invoked with standard input connected to a terminal, an interactive shell is opened. When executing interactively, the simple shell  displays the prompt :) when it is ready to read a command.
+If the shell is invoked with standard input connected to a terminal, an interactive shell is opened. When executing interactively, the simple shell  displays the prompt `:)` when it is ready to read a command.
 
 Example:
 
