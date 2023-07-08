@@ -137,6 +137,7 @@ The PWD environment variable stands for "Present Working Directory." It stores t
 Testing the PWD environment variable of the shell in interactive mode:
 
 ```
+:) ./shell
 :) echo $OLDPWD
 /home/vagrant/ALX
 ```
