@@ -11,7 +11,7 @@ A command line interpreter, also known as a command line shell or simply a shell
 A graphic user interface (GUI) on the other hand is a type of user interface that allows users to interact with electronic devices or software through graphical elements such as icons, buttons, windows, and menus.
 
 ### Relevance of CLI over GUI
-- With command line interfaces, users can perform tasks quickly by typing commands and utilizing keyboard shortcuts, eliminating the need for mouse movements and navigating through menus.
+- With a command line interface, tasks can be performed quickly by typing commands and utilizing keyboard shortcuts, eliminating the need for mouse movements and navigating through menus.
 - Command line interfaces allow for efficient batch processing and automation of repetitive tasks, saving time and effort.
 - Command line interfaces, such as SSH (Secure Shell), allow users to remotely access and administer systems, execute commands, and perform system maintenance without the need for a graphical interface.
 
