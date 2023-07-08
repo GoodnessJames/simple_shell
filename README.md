@@ -1,4 +1,4 @@
-# Simple Shell (Simple Command Line Interpreter)
+ # Simple Shell (Simple Command Line Interpreter)
 
 ![Screenshot (18)](https://github.com/GoodnessJames/simple_shell/assets/128673364/490c2927-252f-4c25-a9d5-d755cbaed87e)
 
@@ -62,7 +62,7 @@ Upon issuing the above command, you should notice a change in the command prompt
 access, chdir, close, closedir, execve, exit, fflush, fork, free, getcwd, getline, getpid, isatty, kill, malloc, open, opendir, perror, read, readdir, signal, stat(_xstat), lstat(_lxstat), fqstat(_fxstat), strtok, wait, waitpid, wait3, wait4, write.
 
 ## Flow of Program Execution
-The step-by-step stages of the execution of the shell program written in this project include:
+The step-by-step stages of the execution of the simple shell program includes:
 1. The `main` function is the entry point of the program. It takes two arguments: `ac` (argument count) and `av` (argument vector which is an array of argument strings from the command line). `ac` and `av` represents the command-line arguments passed to the program.
 Several variables are declared, including `prompt` and `newline`, as pointers to `char`. `prompt` is initialized with the string `":) "`, which represents the prompt for the command line input. `newline` is initialized with the string `"\n"`, which represents a newline character.
 
