@@ -1,4 +1,4 @@
- # Simple Shell (Simple Command Line Interpreter)
+# Simple Shell (Simple Command Line Interpreter)
 
 ![Screenshot (18)](https://github.com/GoodnessJames/simple_shell/assets/128673364/490c2927-252f-4c25-a9d5-d755cbaed87e)
 
@@ -21,16 +21,18 @@ Developing a command line interpreter is an excellent project for learning progr
 The simple shell program allows command input, execution, and effective error handling for invalid commands. The simple shell when invoked displays a prompt ready to accept input from the user and after execution, the prompt is displayed again.
 
 ### Basic Terminologies used in the Simple Shell Program
-- **Commands:** These are specific instructions given to the CLI (shell) to perform an action. A few examples of shell commands include pwd, ls, cd, etc.
-- **Arguments:** Arguments are additional pieces of information provided to a shell program to modify its behavior. Arguments follow the commands and are separated by spaces. Example: ls -l (The -l argument tells the `ls` command to display detailed information about files and directories).
-- **Options:** Options are also known as flags. Options/flags are special types of arguments that modify the behavior of a command. They start with a hyphen or double hyphen and are often preceded by a single letter or word. Example: rm -i (interactive removing of a file).
+- **Commands:** These are specific instructions given to the CLI (shell) to perform an action. A few examples of shell commands include pwd (present working directory), ls (list files and directories), cd (change directory), etc.
+- **Arguments:** Arguments are additional pieces of information provided to a shell program to modify its behavior. Arguments follow the commands and are separated by spaces. Example: `ls -l` (The -l argument tells the `ls` command to display detailed information about files and directories).
+
+The two commands handled by the program include **executable commands** and **shell built-in command**. **Executable commands** are commands that are programs or scripts stored as separate files on the system. They are compiled or interpreted by the operating system or associated software to perform specific tasks. On the other hand, **shell built-in** commands are part of the shell itself and are executed directly within the shell's environment.
+- **Options:** Options are also known as flags. Options/flags are special types of arguments that modify the behavior of a command. They start with a hyphen or double hyphen and are often preceded by a single letter or word. Example: `rm -i` (interactive removing of a file).
 - **Prompt:** A prompt is a message or symbol displayed to the user to indicate that the system is ready to receive input. It typically appears as a text string or a specific character sequence at the beginning of a new line.
 
 A typical prompt in a UNIX-like system looks like this: `eva@DESKTOP-U7IC46B:~$`
 
 ### Key Functionalities of the Simple Shell:
-- Displays a prompt ": ) " and waits for user input.
-- Runs all commands of type "executable program" (ls and /bin/ls).
+- Displays a prompt `":) "` and waits for user input.
+- Runs all executable commands using their relative or absolute paths  (ls and /bin/ls).
 - Runs the following built_in commands: exit, env, setenv, and unsetenv.
 - Handles commands with arguments.
 - Handles the PATH global variable.
@@ -62,7 +64,7 @@ Upon issuing the above command, you should notice a change in the command prompt
 access, chdir, close, closedir, execve, exit, fflush, fork, free, getcwd, getline, getpid, isatty, kill, malloc, open, opendir, perror, read, readdir, signal, stat(_xstat), lstat(_lxstat), fqstat(_fxstat), strtok, wait, waitpid, wait3, wait4, write.
 
 ## Flow of Program Execution
-The step-by-step stages of the execution of the simple shell program includes:
+The step-by-step stages of the execution of the simple shell program include:
 1. The `main` function is the entry point of the program. It takes two arguments: `ac` (argument count) and `av` (argument vector which is an array of argument strings from the command line). `ac` and `av` represents the command-line arguments passed to the program.
 Several variables are declared, including `prompt` and `newline`, as pointers to `char`. `prompt` is initialized with the string `":) "`, which represents the prompt for the command line input. `newline` is initialized with the string `"\n"`, which represents a newline character.
 
@@ -294,7 +296,7 @@ HOME=/rootLANG=en_US.UTF-8
 ```
 **setenv**
 - Usage: `setenv [VARIABLE] [VALUE]`
-- Description: Initializes a new environment variable or modifies an existing one.
+- **Description:** Initializes a new environment variable or modifies an existing one.
 - The `setenv` command is used to set or modify environment variables. 
 - It takes two arguments: `[VARIABLE]` represents the name of the variable, and `[VALUE]` represents the desired value to assign to the variable. 
 - If the variable does not exist, `setenv` creates a new environment variable with the specified name and assigns it the provided value. 
@@ -310,7 +312,7 @@ Eva
 ```
 **unsetenv**
 - **Usage:** `unsetenv [VARIABLE]`
-- Description: Removes an environment variable.
+- **Description:** Removes an environment variable.
 - The `unsetenv` command is used to remove an environment variable. It takes one argument: `[VARIABLE]`, which represents the name of the variable to be removed. 
 - When executed,` unsetenv` removes the specified environment variable from the current environment. 
 - If the variable does not exist, no action is taken. 
