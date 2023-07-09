@@ -3,7 +3,7 @@
 ![Screenshot (18)](https://github.com/GoodnessJames/simple_shell/assets/128673364/490c2927-252f-4c25-a9d5-d755cbaed87e)
 
 ## Overview
-This article is based on a project that entails building a command line interpreter that reads commands from either a file or standard input and executes them just like the Unix Shell.
+This article is centered around a project that involves constructing a command line interpreter capable of reading commands from either a file or standard input and executing them in a manner similar to the Unix Shell.
 
 ## What is a Command Line Interpreter (CLI) and its Relevance over Graphic User Interface (GUI)?
 A command line interpreter, also known as a command line shell or simply a shell, is a program that provides a command line interface (CLI) for users to interact with a computer system or software. It interprets the commands entered by the user and executes them accordingly. Common examples of command line interpreters include Bash (Bourne Again SHell) on Unix-like systems, Command Prompt (cmd.exe) on Windows, and PowerShell on Windows systems. 
